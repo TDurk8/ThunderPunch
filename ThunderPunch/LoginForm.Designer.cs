@@ -42,6 +42,7 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnExit = new System.Windows.Forms.Button();
+            this.lblMaskLogin = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -232,16 +233,28 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // lblMaskLogin
+            // 
+            this.lblMaskLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaskLogin.Location = new System.Drawing.Point(48, 455);
+            this.lblMaskLogin.Name = "lblMaskLogin";
+            this.lblMaskLogin.Size = new System.Drawing.Size(316, 57);
+            this.lblMaskLogin.TabIndex = 14;
+            this.lblMaskLogin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 561);
+            this.Controls.Add(this.lblMaskLogin);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox1);
+            this.KeyPreview = true;
             this.Name = "frmLogin";
             this.Text = "ThunderPunch Login System";
             this.Load += new System.EventHandler(this.LoginForm_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmLogin_KeyPress);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -263,6 +276,7 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Label lblMaskLogin;
     }
 }
 
