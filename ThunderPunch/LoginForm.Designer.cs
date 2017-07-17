@@ -43,6 +43,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.lblMaskLogin = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -235,6 +236,7 @@
             // 
             // lblMaskLogin
             // 
+            this.lblMaskLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMaskLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaskLogin.Location = new System.Drawing.Point(48, 455);
             this.lblMaskLogin.Name = "lblMaskLogin";
@@ -242,11 +244,21 @@
             this.lblMaskLogin.TabIndex = 14;
             this.lblMaskLogin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblStatus
+            // 
+            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Location = new System.Drawing.Point(48, 512);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(316, 40);
+            this.lblStatus.TabIndex = 15;
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 561);
+            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblMaskLogin);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox1);
@@ -277,6 +289,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblMaskLogin;
+        private System.Windows.Forms.Label lblStatus;
     }
 }
 

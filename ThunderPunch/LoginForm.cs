@@ -13,7 +13,7 @@ namespace ThunderPunch
     public partial class frmLogin : Form
     {
         private string Login;
-
+        private Validation validator = new Validation();
         public string Login1 { get => Login; set => Login = value; }
 
         public frmLogin()
@@ -74,9 +74,13 @@ namespace ThunderPunch
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            if (!validator.FourDigits(Login)) lblStatus.Text = " Login must be four digits";
             MessageBox.Show(Login);
             lblMaskLogin.Text = "";
             Login = "";
+            
+                
+            
         }
 
         private void btn9_Click(object sender, EventArgs e)
@@ -99,11 +103,14 @@ namespace ThunderPunch
         {
             Login += digit;
             lblMaskLogin.Text += '*';
+            lblStatus.Text = "";
         }
 
         private void frmLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
             
+            MessageBox.Show(e.KeyChar.ToString());
+            MessageBox.Show(Keys.D1.ToString());
         }
     }
 }
