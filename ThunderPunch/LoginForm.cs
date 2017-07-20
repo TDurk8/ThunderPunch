@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace ThunderPunch
 {
@@ -74,13 +75,20 @@ namespace ThunderPunch
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (!validator.FourDigits(Login)) lblStatus.Text = " Login must be four digits";
-            MessageBox.Show(Login);
-            lblMaskLogin.Text = "";
-            Login = "";
-            
-                
-            
+            //if (!validator.FourDigits(Login)) lblStatus.Text = " Login must be four digits";
+            //MessageBox.Show(Login);
+            //lblMaskLogin.Text = "";
+            //Login = "";
+
+            SqlConnection cs = new SqlConnection("Data Source=thunderpunch.cpdrk8ewqf7q.us-east-2.rds.amazonaws.com; Initial Catalog=thunderpunch; User Id=tdurk8; Password=hondacrx03;");
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.InsertCommand = new SqlCommand("INSERT INTO DropTable VALUES(@FName,@LName)", cs);
+            da.InsertCommand.Parameters.Add("@FName", SqlDbType.NVarChar).Value = "Fred";
+            da.InsertCommand.Parameters.Add("@LName", SqlDbType.NVarChar).Value = "Johnson";
+
+            cs.Open();
+            da.InsertCommand.ExecuteNonQuery();
+            cs.Close();
         }
 
         private void btn9_Click(object sender, EventArgs e)
