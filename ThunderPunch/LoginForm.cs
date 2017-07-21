@@ -80,15 +80,21 @@ namespace ThunderPunch
             //lblMaskLogin.Text = "";
             //Login = "";
 
-            SqlConnection cs = new SqlConnection("Data Source=thunderpunch.cpdrk8ewqf7q.us-east-2.rds.amazonaws.com; Initial Catalog=thunderpunch; User Id=tdurk8; Password=hondacrx03;");
-            SqlDataAdapter da = new SqlDataAdapter();
-            da.InsertCommand = new SqlCommand("INSERT INTO DropTable VALUES(@FName,@LName)", cs);
-            da.InsertCommand.Parameters.Add("@FName", SqlDbType.NVarChar).Value = "Fred";
-            da.InsertCommand.Parameters.Add("@LName", SqlDbType.NVarChar).Value = "Johnson";
+            //SqlConnection cs = new SqlConnection("Data Source=thunderpunch.cpdrk8ewqf7q.us-east-2.rds.amazonaws.com; Initial Catalog=thunderpunch; User Id=tdurk8; Password=hondacrx03;");
+            //SqlDataAdapter da = new SqlDataAdapter();
+            //da.InsertCommand = new SqlCommand("INSERT INTO DropTable VALUES(@FName,@LName)", cs);
+            //da.InsertCommand.Parameters.Add("@FName", SqlDbType.NVarChar).Value = "Fred";
+            //da.InsertCommand.Parameters.Add("@LName", SqlDbType.NVarChar).Value = "Johnson";
 
-            cs.Open();
-            da.InsertCommand.ExecuteNonQuery();
-            cs.Close();
+            //cs.Open();
+            //da.InsertCommand.ExecuteNonQuery();
+            //cs.Close();
+
+            SQL_Interact test = new SQL_Interact();
+            lblStatus.Text=test.ValidLogin(Login);
+            Login = "";
+            lblMaskLogin.Text = "";
+            
         }
 
         private void btn9_Click(object sender, EventArgs e)
