@@ -44,7 +44,14 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.lblMaskLogin = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.lblLName = new System.Windows.Forms.Label();
+            this.lblFName = new System.Windows.Forms.Label();
+            this.pbProfilePic = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbProfilePic)).BeginInit();
             this.SuspendLayout();
             // 
             // btn1
@@ -226,7 +233,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(508, 538);
+            this.btnExit.Location = new System.Drawing.Point(632, 529);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 13;
@@ -253,11 +260,62 @@
             this.lblStatus.TabIndex = 15;
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lblTitle);
+            this.groupBox2.Controls.Add(this.lblLName);
+            this.groupBox2.Controls.Add(this.lblFName);
+            this.groupBox2.Controls.Add(this.pbProfilePic);
+            this.groupBox2.Location = new System.Drawing.Point(370, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(215, 250);
+            this.groupBox2.TabIndex = 16;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(6, 203);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(197, 28);
+            this.lblTitle.TabIndex = 3;
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblLName
+            // 
+            this.lblLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLName.Location = new System.Drawing.Point(6, 175);
+            this.lblLName.Name = "lblLName";
+            this.lblLName.Size = new System.Drawing.Size(197, 28);
+            this.lblLName.TabIndex = 2;
+            this.lblLName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblFName
+            // 
+            this.lblFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFName.Location = new System.Drawing.Point(6, 147);
+            this.lblFName.Name = "lblFName";
+            this.lblFName.Size = new System.Drawing.Size(197, 28);
+            this.lblFName.TabIndex = 1;
+            this.lblFName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pbProfilePic
+            // 
+            this.pbProfilePic.Location = new System.Drawing.Point(42, 19);
+            this.pbProfilePic.Name = "pbProfilePic";
+            this.pbProfilePic.Size = new System.Drawing.Size(125, 125);
+            this.pbProfilePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbProfilePic.TabIndex = 0;
+            this.pbProfilePic.TabStop = false;
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 561);
+            this.ClientSize = new System.Drawing.Size(719, 561);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblMaskLogin);
             this.Controls.Add(this.btnExit);
@@ -268,6 +326,8 @@
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmLogin_KeyPress);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbProfilePic)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -290,6 +350,11 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblMaskLogin;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lblFName;
+        private System.Windows.Forms.PictureBox pbProfilePic;
+        private System.Windows.Forms.Label lblLName;
+        private System.Windows.Forms.Label lblTitle;
     }
 }
 

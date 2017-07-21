@@ -22,15 +22,9 @@ namespace ThunderPunch
             da = new SqlDataAdapter();
         }
 
-        public string ValidLogin(string Login)
+        public User ValidLogin(string Login)
         {
-            //SqlCommand command = new SqlCommand("SELECT * FROM Employees WHERE LoginID = @LoginID", cs);
-            //command.Parameters.Add("@LoginID", SqlDbType.NVarChar, 6481);
-            //da.SelectCommand = command;
-            //MessageBox.Show(da.SelectCommand.CommandText);
-            string status = "Invalid User";
-            User user = new User();
-            user = null;
+            User user = null;
 
             SqlCommand command = new SqlCommand("SELECT * from Employee", cs);
 
@@ -40,13 +34,13 @@ namespace ThunderPunch
             {
                 if (dr["LoginID"].ToString() == Login)
                 {
-                    MessageBox.Show(dr["FName"].ToString());
-                    status = "";
+                    user = new User(dr["FName"].ToString(), dr["LName"].ToString(), dr["LoginID"].ToString(), dr["Title"].ToString(),dr["EmployeePhoto"].ToString());
                     break;
                 }
             }
-            return status;
             cs.Close();
+            return user;
+            
         }
     }
 }

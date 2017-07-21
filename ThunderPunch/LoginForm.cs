@@ -15,7 +15,6 @@ namespace ThunderPunch
     {
         private string Login;
         private Validation validator = new Validation();
-        public string Login1 { get => Login; set => Login = value; }
 
         public frmLogin()
         {
@@ -75,25 +74,31 @@ namespace ThunderPunch
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            //if (!validator.FourDigits(Login)) lblStatus.Text = " Login must be four digits";
-            //MessageBox.Show(Login);
-            //lblMaskLogin.Text = "";
-            //Login = "";
-
-            //SqlConnection cs = new SqlConnection("Data Source=thunderpunch.cpdrk8ewqf7q.us-east-2.rds.amazonaws.com; Initial Catalog=thunderpunch; User Id=tdurk8; Password=hondacrx03;");
-            //SqlDataAdapter da = new SqlDataAdapter();
-            //da.InsertCommand = new SqlCommand("INSERT INTO DropTable VALUES(@FName,@LName)", cs);
-            //da.InsertCommand.Parameters.Add("@FName", SqlDbType.NVarChar).Value = "Fred";
-            //da.InsertCommand.Parameters.Add("@LName", SqlDbType.NVarChar).Value = "Johnson";
-
-            //cs.Open();
-            //da.InsertCommand.ExecuteNonQuery();
-            //cs.Close();
-
+            resetLastUser();
+            //Create User to store return found in database
+            User loginUser;
+            
+            //Create object for class SQL_Interact to connect to database and read data
+            //also sends the current login from the user.
             SQL_Interact test = new SQL_Interact();
-            lblStatus.Text=test.ValidLogin(Login);
-            Login = "";
-            lblMaskLogin.Text = "";
+            loginUser=test.ValidLogin(Login);
+            
+            //reset interface
+            ResetLoginForm();
+
+            if (loginUser != null)
+            {
+                pbProfilePic.ImageLocation = loginUser.profilePic + ".jpg";
+                lblFName.Text= loginUser.fName;
+                lblLName.Text= (loginUser.lName);
+                lblTitle.Text=(loginUser.title);
+                
+            }
+            else
+            {
+                lblStatus.Text = "Invalid User";
+            }
+
             
         }
 
@@ -104,8 +109,8 @@ namespace ThunderPunch
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            Login = "";
-            lblMaskLogin.Text = "";
+            resetLastUser();
+            ResetLoginForm();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -118,13 +123,34 @@ namespace ThunderPunch
             Login += digit;
             lblMaskLogin.Text += '*';
             lblStatus.Text = "";
+            resetLastUser();
         }
 
         private void frmLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+            resetLastUser();
             MessageBox.Show(e.KeyChar.ToString());
             MessageBox.Show(Keys.D1.ToString());
+        }
+
+        public void ResetLoginForm()
+        {
+            lblStatus.Text = "";
+            lblMaskLogin.Text = "";
+            Login = "";
+        }
+
+        public void resetLastUser()
+        {
+            lblFName.Text = "";
+            lblLName.Text = "";
+            lblTitle.Text = "";
+            pbProfilePic.Image = null;
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
