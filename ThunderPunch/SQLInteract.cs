@@ -27,20 +27,35 @@ namespace ThunderPunch
             User user = null;
 
             SqlCommand command = new SqlCommand("SELECT * from Employee", cs);
-
-            cs.Open();
-            dr = command.ExecuteReader();
-            while (dr.Read())
+            if (DB_Status())
             {
-                if (dr["LoginID"].ToString() == Login)
+                cs.Open();
+                dr = command.ExecuteReader();
+                while (dr.Read())
                 {
-                    user = new User(dr["FName"].ToString(), dr["LName"].ToString(), dr["LoginID"].ToString(), dr["Title"].ToString(),dr["EmployeePhoto"].ToString());
-                    break;
+                    if (dr["LoginID"].ToString() == Login)
+                    {
+                        user = new User(dr["FName"].ToString(), dr["LName"].ToString(), dr["LoginID"].ToString(), dr["Title"].ToString(), dr["EmployeePhoto"].ToString());
+                        break;
+                    }
                 }
+                cs.Close();
             }
-            cs.Close();
             return user;
-            
+        }
+
+        public bool DB_Status()
+        {
+            try
+            {
+                cs.Open();
+                cs.Close();
+                return true;
+            }
+            catch (SqlException)
+            {
+                return false;
+            }
         }
     }
 }

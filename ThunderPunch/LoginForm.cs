@@ -15,11 +15,13 @@ namespace ThunderPunch
     {
         private string Login;
         private Validation validator = new Validation();
+        
 
         public frmLogin()
         {
             
             InitializeComponent();
+            DisplayConnectionStatus();
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
@@ -98,8 +100,8 @@ namespace ThunderPunch
             {
                 lblStatus.Text = "Invalid User";
             }
+            DisplayConnectionStatus();
 
-            
         }
 
         private void btn9_Click(object sender, EventArgs e)
@@ -124,11 +126,13 @@ namespace ThunderPunch
             lblMaskLogin.Text += '*';
             lblStatus.Text = "";
             resetLastUser();
+            DisplayConnectionStatus();
         }
 
         private void frmLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
             resetLastUser();
+            DisplayConnectionStatus();
             MessageBox.Show(e.KeyChar.ToString());
             MessageBox.Show(Keys.D1.ToString());
         }
@@ -151,6 +155,22 @@ namespace ThunderPunch
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        public void DisplayConnectionStatus()
+        {
+            SQL_Interact status = new SQL_Interact();
+            if (status.DB_Status())
+            {
+                pbNetworkStatus.Image = Properties.Resources.greencircle;
+                lblNetworkStatus.Text = "Connected";
+            }
+            else
+            {
+                pbNetworkStatus.Image = Properties.Resources.redcircle;
+                lblNetworkStatus.Text = "Unable to connect to database";
+            }
+            pbNetworkStatus.Refresh();
         }
     }
 }

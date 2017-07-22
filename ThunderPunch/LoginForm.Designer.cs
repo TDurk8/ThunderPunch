@@ -49,9 +49,12 @@
             this.lblLName = new System.Windows.Forms.Label();
             this.lblFName = new System.Windows.Forms.Label();
             this.pbProfilePic = new System.Windows.Forms.PictureBox();
+            this.pbNetworkStatus = new System.Windows.Forms.PictureBox();
+            this.lblNetworkStatus = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbProfilePic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNetworkStatus)).BeginInit();
             this.SuspendLayout();
             // 
             // btn1
@@ -233,7 +236,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(632, 529);
+            this.btnExit.Location = new System.Drawing.Point(632, 592);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 13;
@@ -310,11 +313,32 @@
             this.pbProfilePic.TabIndex = 0;
             this.pbProfilePic.TabStop = false;
             // 
+            // pbNetworkStatus
+            // 
+            this.pbNetworkStatus.Image = global::ThunderPunch.Properties.Resources.redcircle;
+            this.pbNetworkStatus.Location = new System.Drawing.Point(12, 598);
+            this.pbNetworkStatus.Name = "pbNetworkStatus";
+            this.pbNetworkStatus.Size = new System.Drawing.Size(10, 10);
+            this.pbNetworkStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbNetworkStatus.TabIndex = 17;
+            this.pbNetworkStatus.TabStop = false;
+            // 
+            // lblNetworkStatus
+            // 
+            this.lblNetworkStatus.AutoSize = true;
+            this.lblNetworkStatus.Location = new System.Drawing.Point(28, 597);
+            this.lblNetworkStatus.Name = "lblNetworkStatus";
+            this.lblNetworkStatus.Size = new System.Drawing.Size(154, 13);
+            this.lblNetworkStatus.TabIndex = 18;
+            this.lblNetworkStatus.Text = "Unable to connect to database";
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 561);
+            this.ClientSize = new System.Drawing.Size(719, 622);
+            this.Controls.Add(this.lblNetworkStatus);
+            this.Controls.Add(this.pbNetworkStatus);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblMaskLogin);
@@ -328,7 +352,9 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbProfilePic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNetworkStatus)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -355,6 +381,8 @@
         private System.Windows.Forms.PictureBox pbProfilePic;
         private System.Windows.Forms.Label lblLName;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.PictureBox pbNetworkStatus;
+        private System.Windows.Forms.Label lblNetworkStatus;
     }
 }
 
