@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Threading;
 
 namespace ThunderPunch
 {
@@ -20,8 +21,7 @@ namespace ThunderPunch
         public frmLogin()
         {
             
-            InitializeComponent();
-            DisplayConnectionStatus();
+            InitializeComponent();  
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
@@ -129,14 +129,6 @@ namespace ThunderPunch
             DisplayConnectionStatus();
         }
 
-        private void frmLogin_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            resetLastUser();
-            DisplayConnectionStatus();
-            MessageBox.Show(e.KeyChar.ToString());
-            MessageBox.Show(Keys.D1.ToString());
-        }
-
         public void ResetLoginForm()
         {
             lblStatus.Text = "";
@@ -150,11 +142,6 @@ namespace ThunderPunch
             lblLName.Text = "";
             lblTitle.Text = "";
             pbProfilePic.Image = null;
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
         }
 
         public void DisplayConnectionStatus()
@@ -171,6 +158,17 @@ namespace ThunderPunch
                 lblNetworkStatus.Text = "Unable to connect to database";
             }
             pbNetworkStatus.Refresh();
+        }
+
+        private void frmLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Cleanup GUI and check database connection
+            resetLastUser();
+            DisplayConnectionStatus();
+
+            //only allow keystrokes that are digits.
+            if (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) DigitInput((e.KeyValue - 48).ToString());
+            if (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9) DigitInput((e.KeyValue-96).ToString());
         }
     }
 }

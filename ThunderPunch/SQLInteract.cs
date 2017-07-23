@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Threading;
+
 
 namespace ThunderPunch
 {
@@ -16,6 +18,7 @@ namespace ThunderPunch
         SqlDataReader dr = null;
         DataSet ds = new DataSet();
         BindingSource bs = new BindingSource();
+        
         public SQL_Interact()
         {
             cs = new SqlConnection("Data Source=thunderpunch.cpdrk8ewqf7q.us-east-2.rds.amazonaws.com; Initial Catalog=thunderpunch; User Id=tdurk8; Password=hondacrx03;");
@@ -46,8 +49,10 @@ namespace ThunderPunch
 
         public bool DB_Status()
         {
+            
             try
             {
+                
                 cs.Open();
                 cs.Close();
                 return true;
@@ -56,6 +61,6 @@ namespace ThunderPunch
             {
                 return false;
             }
-        }
+        }   
     }
 }
