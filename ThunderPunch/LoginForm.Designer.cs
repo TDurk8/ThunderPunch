@@ -345,6 +345,7 @@
             this.btnshow.Name = "btnshow";
             this.btnshow.Size = new System.Drawing.Size(75, 23);
             this.btnshow.TabIndex = 19;
+            this.btnshow.TabStop = false;
             this.btnshow.Text = "showUserEdit";
             this.btnshow.UseVisualStyleBackColor = true;
             this.btnshow.Click += new System.EventHandler(this.btnshow_Click);

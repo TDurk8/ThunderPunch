@@ -174,6 +174,7 @@ namespace ThunderPunch
         {
             ResetLoginForm();
             resetLastUser();
+            btnOK.Focus();
         }
 
         public void ResetLoginForm()
