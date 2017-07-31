@@ -22,8 +22,8 @@ namespace ThunderPunch
         {
             
             InitializeComponent();
-            timerTime.Start();
-            tmrTimeout.Start();
+           //timerTime.Start();
+           //tmrTimeout.Start();
             ResetGUI();
             
         }
