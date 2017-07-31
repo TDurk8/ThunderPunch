@@ -78,6 +78,7 @@ namespace ThunderPunch
             txtAddress2.Clear();
             txtCity.Clear();
             cmboState.SelectedIndex = -1;
+            lblDOBError.Text = "";
         }
         public enum State
         {
@@ -299,7 +300,8 @@ namespace ThunderPunch
             }
             else if (txtDayDOB.Text!="  Day" && txtYearDOB.Text!="  Year" && cmboDOBMonth.SelectedIndex >= 0)
             {
-                if (!validator.IsValidDay(cmboDOBMonth.SelectedIndex, txtDayDOB.Text, txtYearDOB.Text))MessageBox.Show("Invalid") ;
+                if (!validator.IsValidDay(cmboDOBMonth.SelectedIndex, txtDayDOB.Text, txtYearDOB.Text)) lblDOBError.Text = "Invalid DOB";
+                else lblDOBError.Text = "";
             }
         }
 
@@ -323,7 +325,8 @@ namespace ThunderPunch
             }
             else if (txtDayDOB.Text != "  Day" && txtYearDOB.Text != "  Year" && cmboDOBMonth.SelectedIndex >= 0)
             {
-                if (!validator.IsValidDay(cmboDOBMonth.SelectedIndex, txtDayDOB.Text, txtYearDOB.Text)) MessageBox.Show("Invalid");
+                if (!validator.IsValidDay(cmboDOBMonth.SelectedIndex, txtDayDOB.Text, txtYearDOB.Text)) lblDOBError.Text = "Invalid DOB";
+                else lblDOBError.Text = "";
             }
         }
 
@@ -341,7 +344,8 @@ namespace ThunderPunch
         {
             if (txtDayDOB.Text != "  Day" && txtYearDOB.Text != "  Year" && cmboDOBMonth.SelectedIndex >= 0)
             {
-                if (!validator.IsValidDay(cmboDOBMonth.SelectedIndex, txtDayDOB.Text, txtYearDOB.Text)) MessageBox.Show("Invalid");
+                if (!validator.IsValidDay(cmboDOBMonth.SelectedIndex, txtDayDOB.Text, txtYearDOB.Text)) lblDOBError.Text="Invalid DOB";
+                else lblDOBError.Text = "";
             }
         }
     }

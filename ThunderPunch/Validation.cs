@@ -38,21 +38,17 @@ namespace ThunderPunch
 
         public bool IsValidDay(int month, string day, string year)
         {
-            if (Regex.IsMatch(day.Trim(), @"[0-9]") && Regex.IsMatch(year.Trim(), @"[0-9]"))
+            int dobDay;
+            int dobYear;
+            if (int.TryParse(day, out dobDay) && int.TryParse(year,out dobYear))
             {
-                int dobDay = Int32.Parse(day);
-                int dobYear = Int32.Parse(year);
-
                 //verify that a semi reasonable year is picked.
                 if ((DateTime.Now.Year - dobYear) > 18 && (DateTime.Now.Year - dobYear) < 120)
                 {
-                    if (dobDay > 0 && dobDay <= DateTime.DaysInMonth(dobYear, dobDay)) return true;
+                    if (dobDay > 0 && dobDay <= DateTime.DaysInMonth(dobYear, month+1)) return true;
                     else return false;
                 }
-                else
-                {
-                    return false;
-                }
+                else return false;
             }
             else return false;
         }

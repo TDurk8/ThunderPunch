@@ -53,6 +53,7 @@
             this.txtFName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.tbNew = new System.Windows.Forms.TabPage();
+            this.lblDOBError = new System.Windows.Forms.Label();
             this.tbctrlUser.SuspendLayout();
             this.tabUserPersonalInfo.SuspendLayout();
             this.SuspendLayout();
@@ -81,6 +82,7 @@
             // 
             this.tabUserPersonalInfo.BackColor = System.Drawing.Color.Gray;
             this.tabUserPersonalInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabUserPersonalInfo.Controls.Add(this.lblDOBError);
             this.tabUserPersonalInfo.Controls.Add(this.txtYearDOB);
             this.tabUserPersonalInfo.Controls.Add(this.txtDayDOB);
             this.tabUserPersonalInfo.Controls.Add(this.btnClear);
@@ -368,6 +370,17 @@
             this.tbNew.TabIndex = 1;
             this.tbNew.Text = "New Employee";
             // 
+            // lblDOBError
+            // 
+            this.lblDOBError.AutoSize = true;
+            this.lblDOBError.BackColor = System.Drawing.Color.Transparent;
+            this.lblDOBError.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblDOBError.Location = new System.Drawing.Point(348, 149);
+            this.lblDOBError.Name = "lblDOBError";
+            this.lblDOBError.Size = new System.Drawing.Size(80, 23);
+            this.lblDOBError.TabIndex = 1;
+            this.lblDOBError.Text = "DOB error";
+            // 
             // ModifyUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -411,5 +424,6 @@
         private System.Windows.Forms.ComboBox cmboDOBMonth;
         private System.Windows.Forms.TextBox txtDayDOB;
         private System.Windows.Forms.TextBox txtYearDOB;
+        private System.Windows.Forms.Label lblDOBError;
     }
 }
