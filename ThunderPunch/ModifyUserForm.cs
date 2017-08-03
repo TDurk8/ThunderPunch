@@ -12,7 +12,8 @@ namespace ThunderPunch
 {
     public partial class ModifyUserForm : Form
     {
-        Validation validator = new Validation();
+        private Validation validator = new Validation();
+        private bool nonNumber = false;
         public ModifyUserForm()
         {
             InitializeComponent();
@@ -56,6 +57,7 @@ namespace ThunderPunch
 
         private void SetStateList()
         {
+            cmboState.Items.Clear();
             foreach(State state in Enum.GetValues(typeof(State)))
             {
                 cmboState.Items.Add(state);
@@ -65,6 +67,7 @@ namespace ThunderPunch
 
         private void SetUserForm()
         {
+            
             SetStateList();
             txtFName.Text="  First";
             txtLName.Text = "  Last";
@@ -79,6 +82,23 @@ namespace ThunderPunch
             txtCity.Clear();
             cmboState.SelectedIndex = -1;
             lblDOBError.Text = "";
+            lblNameError.Text = "";
+            lblEmailError.Text = "";
+            lblPhoneError.Text = "";
+            lblZipError.Text = "";
+            txtZipcode.Text = "";
+            txtAddress1.Text = "";
+            txtAddress2.Text = "";
+            txtCity.Text = "";
+            cmboState.SelectedIndex = -1;
+            txtFName.ForeColor = Color.DarkGray;
+            txtFName.Font = new Font(txtFName.Font, FontStyle.Italic);
+            txtLName.ForeColor = System.Drawing.Color.DarkGray;
+            txtLName.Font = new Font(txtFName.Font, FontStyle.Italic);
+            txtDayDOB.ForeColor = System.Drawing.Color.DarkGray;
+            txtDayDOB.Font = new Font(txtDayDOB.Font, FontStyle.Italic);
+            txtYearDOB.ForeColor = System.Drawing.Color.DarkGray;
+            txtYearDOB.Font = new Font(txtYearDOB.Font, FontStyle.Italic);
         }
         public enum State
         {
@@ -244,13 +264,22 @@ namespace ThunderPunch
 
         private void txtFName_Leave(object sender, EventArgs e)
         {
+            txtFName.Text= txtFName.Text.Trim();
             if (txtFName.Text == "")
             {
                 txtFName.Text = "  First";
-                txtFName.ForeColor = System.Drawing.Color.DarkGray;
+                txtFName.ForeColor = Color.DarkGray;
                 txtFName.Font = new Font(txtFName.Font, FontStyle.Italic);
             }
-            else if (!validator.IsAlpha(txtFName.Text)) MessageBox.Show("failure");
+            else if (!validator.IsAlpha(txtFName.Text))
+            {
+                lblNameError.Text = "Invalid First Name";
+                txtFName.Focus();
+            }
+            else
+            {
+                lblNameError.Text = "";
+            }
         }
 
         private void txtFName_Enter(object sender, EventArgs e)
@@ -275,23 +304,41 @@ namespace ThunderPunch
 
         private void txtLName_Leave(object sender, EventArgs e)
         {
+            txtLName.Text = txtLName.Text.Trim();
             if (txtLName.Text == "")
             {
                 txtLName.Text = "  Last";
                 txtLName.ForeColor = System.Drawing.Color.DarkGray;
                 txtLName.Font = new Font(txtFName.Font, FontStyle.Italic);
             }
-            else if (!validator.IsAlpha(txtLName.Text)) MessageBox.Show("failure");
+            else if (!validator.IsAlpha(txtLName.Text))
+            {
+                lblNameError.Text = "Invalid Last Name";
+                txtLName.Focus();
+            }
+            else
+            {
+                lblNameError.Text = "";
+            }
         }
 
         private void txtEmail_Leave(object sender, EventArgs e)
         {
-           if (validator.IsEmail(txtEmail.Text)) MessageBox.Show("Valid");
-            else MessageBox.Show("Invalid");
+            txtEmail.Text = txtEmail.Text.Trim();
+            if (!validator.IsEmail(txtEmail.Text.Trim()) && txtEmail.Text.Trim()!= "")
+            {
+                lblEmailError.Text = "Invalid Email Address";
+                txtEmail.Focus();
+            }
+            else
+            {
+                lblEmailError.Text = "";
+            }
         }
 
         private void txtDayDOB_Leave(object sender, EventArgs e)
         {
+            txtDayDOB.Text = txtDayDOB.Text.Trim();
             if (txtDayDOB.Text == "")
             {
                 txtDayDOB.Text = "  Day";
@@ -300,7 +347,10 @@ namespace ThunderPunch
             }
             else if (txtDayDOB.Text!="  Day" && txtYearDOB.Text!="  Year" && cmboDOBMonth.SelectedIndex >= 0)
             {
-                if (!validator.IsValidDay(cmboDOBMonth.SelectedIndex, txtDayDOB.Text, txtYearDOB.Text)) lblDOBError.Text = "Invalid DOB";
+                if (!validator.IsValidDay(cmboDOBMonth.SelectedIndex, txtDayDOB.Text, txtYearDOB.Text))
+                {
+                    lblDOBError.Text = "Invalid DOB";
+                }
                 else lblDOBError.Text = "";
             }
         }
@@ -317,6 +367,7 @@ namespace ThunderPunch
 
         private void txtYearDOB_Leave(object sender, EventArgs e)
         {
+            txtYearDOB.Text = txtYearDOB.Text.Trim();
             if (txtYearDOB.Text == "")
             {
                 txtYearDOB.Text = "  Year";
@@ -325,7 +376,10 @@ namespace ThunderPunch
             }
             else if (txtDayDOB.Text != "  Day" && txtYearDOB.Text != "  Year" && cmboDOBMonth.SelectedIndex >= 0)
             {
-                if (!validator.IsValidDay(cmboDOBMonth.SelectedIndex, txtDayDOB.Text, txtYearDOB.Text)) lblDOBError.Text = "Invalid DOB";
+                if (!validator.IsValidDay(cmboDOBMonth.SelectedIndex, txtDayDOB.Text, txtYearDOB.Text))
+                {
+                    lblDOBError.Text = "Invalid DOB";
+                }
                 else lblDOBError.Text = "";
             }
         }
@@ -348,5 +402,47 @@ namespace ThunderPunch
                 else lblDOBError.Text = "";
             }
         }
-    }
+
+        private void txtZipcode_Leave(object sender, EventArgs e)
+        {
+            if (validator.IsZip(txtZipcode.Text)) MessageBox.Show("valid");
+        }
+
+        private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (nonNumber)
+            {
+                e.Handled = true;
+            }
+            else FormatPhone(txtPhone.Text);
+        }
+
+        private void txtPhone_KeyDown(object sender, KeyEventArgs e)
+        {
+            nonNumber = false;
+            
+            if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
+            {
+                if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
+                {
+                    if (e.KeyCode != Keys.Back)
+                    {
+                        nonNumber = true;
+                    }
+                }
+            }
+        }
+
+        private void FormatPhone(string phone)
+        {
+            int digitCount = phone.Count();
+            string formatPhone;
+            MessageBox.Show(digitCount.ToString());
+            switch(digitCount)
+            {
+                case 1:
+                    formatPhone="("+
+            }
+        }
+    }        
 }

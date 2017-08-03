@@ -27,8 +27,12 @@ namespace ThunderPunch
         {
             try
             {
-                MailAddress mail = new MailAddress(email);
-                return true;
+                if (email != "")
+                {
+                    MailAddress mail = new MailAddress(email);
+                    return true;
+                }
+                else return false;
             }
             catch (FormatException)
             {
@@ -52,5 +56,13 @@ namespace ThunderPunch
             }
             else return false;
         }
+
+        public bool IsZip(string zipcode)
+        {
+            int zip;
+            if (zipcode.Length == 5 && int.TryParse(zipcode,out zip)&& zip >0) return true;
+            else return false;
+        }
+
     }
 }
