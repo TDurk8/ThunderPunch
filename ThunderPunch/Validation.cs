@@ -64,5 +64,22 @@ namespace ThunderPunch
             else return false;
         }
 
+        public bool IsNumber(KeyEventArgs e)
+        {
+            if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
+            {
+                if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
+                {
+                    if (e.KeyCode != Keys.Back)
+                    {
+                        
+                        //MessageBox.Show(e.KeyCode.ToString());
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
     }
 }

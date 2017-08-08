@@ -13,6 +13,7 @@ namespace ThunderPunch
     public partial class ModifyUserForm : Form
     {
         private Validation validator = new Validation();
+        private FormatText textFormater = new FormatText();
         private bool nonNumber = false;
         public ModifyUserForm()
         {
@@ -34,7 +35,7 @@ namespace ThunderPunch
 
                     // Draw a different background color, and don't paint a focus rectangle.
                     _textBrush = new SolidBrush(Color.White);
-                    g.FillRectangle(Brushes.SteelBlue, e.Bounds);
+                    g.FillRectangle(Brushes.Gray, e.Bounds);
                 }
             else
                 {
@@ -273,12 +274,13 @@ namespace ThunderPunch
             }
             else if (!validator.IsAlpha(txtFName.Text))
             {
-                lblNameError.Text = "Invalid First Name";
+                lblNameError.Text = "Invalid Name";
                 txtFName.Focus();
             }
             else
             {
                 lblNameError.Text = "";
+                txtFName.Text = textFormater.ProperName(txtFName.Text);
             }
         }
 
@@ -313,12 +315,13 @@ namespace ThunderPunch
             }
             else if (!validator.IsAlpha(txtLName.Text))
             {
-                lblNameError.Text = "Invalid Last Name";
+                lblNameError.Text = "Invalid Name";
                 txtLName.Focus();
             }
             else
             {
                 lblNameError.Text = "";
+                txtLName.Text = textFormater.ProperName(txtLName.Text);
             }
         }
 
@@ -327,7 +330,7 @@ namespace ThunderPunch
             txtEmail.Text = txtEmail.Text.Trim();
             if (!validator.IsEmail(txtEmail.Text.Trim()) && txtEmail.Text.Trim()!= "")
             {
-                lblEmailError.Text = "Invalid Email Address";
+                lblEmailError.Text = "Invalid Email";
                 txtEmail.Focus();
             }
             else
@@ -405,43 +408,84 @@ namespace ThunderPunch
 
         private void txtZipcode_Leave(object sender, EventArgs e)
         {
-            if (validator.IsZip(txtZipcode.Text)) MessageBox.Show("valid");
+            if (!validator.IsZip(txtZipcode.Text)&& txtZipcode.Text!="")
+            {
+                lblZipError.Text = "Invalid Zip";
+                txtZipcode.Focus();
+            }
+            else
+            {
+                lblZipError.Text = "";
+            }
         }
 
         private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (nonNumber)
-            {
-                e.Handled = true;
-            }
-            else FormatPhone(txtPhone.Text);
+            if (nonNumber || (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)) e.Handled = true;
         }
 
         private void txtPhone_KeyDown(object sender, KeyEventArgs e)
         {
-            nonNumber = false;
-            
-            if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
+            nonNumber = validator.IsNumber(e);
+        }
+
+        private void txtZipcode_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (nonNumber || (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)) e.Handled = true;
+        }
+
+        private void txtZipcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            nonNumber = validator.IsNumber(e);
+        }
+
+        private void txtPhone_Leave(object sender, EventArgs e)
+        {
+            if (txtPhone.Text.Count() == 10)
             {
-                if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
-                {
-                    if (e.KeyCode != Keys.Back)
-                    {
-                        nonNumber = true;
-                    }
-                }
+                txtPhone.Text = textFormater.Phone(txtPhone.Text);
+                lblPhoneError.Text = "";
+            }
+            else if (txtPhone.Text != "")
+            {
+                lblPhoneError.Text = "Invalid Phone Number";
+                txtPhone.Focus();
             }
         }
 
-        private void FormatPhone(string phone)
+        private void txtDayDOB_KeyDown(object sender, KeyEventArgs e)
         {
-            int digitCount = phone.Count();
-            string formatPhone;
-            MessageBox.Show(digitCount.ToString());
-            switch(digitCount)
+            nonNumber = validator.IsNumber(e);
+        }
+
+        //verify that there is a nonnumber pressed 
+        //then check to see if a special character like a '!' was pressed
+        //by checking if it is not an integer and not the backspace.
+        private void txtDayDOB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (nonNumber || (!char.IsDigit(e.KeyChar)&& e.KeyChar !=(char)Keys.Back)) e.Handled = true;
+        }
+
+        private void txtYearDOB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (nonNumber || (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)) e.Handled = true;
+        }
+
+        private void txtYearDOB_KeyDown(object sender, KeyEventArgs e)
+        {
+            nonNumber = validator.IsNumber(e);
+        }
+        private void txtPhone_Enter(object sender, EventArgs e)
+        {
+            string phone = txtPhone.Text;
+
+            if (phone.Count() == 13 && phone.Substring(0, 1) == "(" && phone.Substring(4, 1) == ")" && phone.Substring(8, 1) == "-")
             {
-                case 1:
-                    formatPhone="("+
+                txtPhone.Clear();
+                foreach (char c in phone)
+                {
+                    if (char.IsDigit(c)) txtPhone.Text += c.ToString();
+                }
             }
         }
     }        
