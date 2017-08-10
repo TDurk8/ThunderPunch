@@ -38,7 +38,7 @@ namespace ThunderPunch
                 {
                     if (dr["LoginID"].ToString() == Login)
                     {
-                        user = new User(dr["FName"].ToString(), dr["LName"].ToString(), dr["LoginID"].ToString(), dr["Title"].ToString(), dr["EmployeePhoto"].ToString());
+                        user = new User(dr["FName"].ToString(), dr["LName"].ToString(), dr["LoginID"].ToString(), dr["PositionID"].ToString(), dr["EmployeePhoto"].ToString());
                         break;
                     }
                 }
@@ -61,6 +61,6 @@ namespace ThunderPunch
             {
                 return false;
             }
-        }   
+        }
     }
 }

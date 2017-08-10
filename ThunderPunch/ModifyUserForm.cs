@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace ThunderPunch
 {
     public partial class ModifyUserForm : Form
     {
         private Validation validator = new Validation();
         private FormatText textFormater = new FormatText();
-        private bool nonNumber = false;
+        
         public ModifyUserForm()
         {
             InitializeComponent();
@@ -100,6 +101,8 @@ namespace ThunderPunch
             txtDayDOB.Font = new Font(txtDayDOB.Font, FontStyle.Italic);
             txtYearDOB.ForeColor = System.Drawing.Color.DarkGray;
             txtYearDOB.Font = new Font(txtYearDOB.Font, FontStyle.Italic);
+            lblLoginError.Text = "";
+            txtLogin.Clear();
         }
         public enum State
         {
@@ -366,6 +369,10 @@ namespace ThunderPunch
                 txtDayDOB.ForeColor = System.Drawing.Color.Black;
                 txtDayDOB.Font = new Font(txtDayDOB.Font, FontStyle.Regular);
             }
+            else
+            {
+                lblDOBError.Text = "";
+            }
         }
 
         private void txtYearDOB_Leave(object sender, EventArgs e)
@@ -395,10 +402,15 @@ namespace ThunderPunch
                 txtYearDOB.ForeColor = System.Drawing.Color.Black;
                 txtYearDOB.Font = new Font(txtYearDOB.Font, FontStyle.Regular);
             }
+            else
+            {
+                lblDOBError.Text = "";
+            }
         }
 
         private void cmboDOBMonth_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            lblDOBError.Text = "";
             if (txtDayDOB.Text != "  Day" && txtYearDOB.Text != "  Year" && cmboDOBMonth.SelectedIndex >= 0)
             {
                 if (!validator.IsValidDay(cmboDOBMonth.SelectedIndex, txtDayDOB.Text, txtYearDOB.Text)) lblDOBError.Text="Invalid DOB";
@@ -421,23 +433,14 @@ namespace ThunderPunch
 
         private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (nonNumber || (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)) e.Handled = true;
-        }
-
-        private void txtPhone_KeyDown(object sender, KeyEventArgs e)
-        {
-            nonNumber = validator.IsNumber(e);
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back) e.Handled = true;
         }
 
         private void txtZipcode_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (nonNumber || (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)) e.Handled = true;
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back) e.Handled = true;
         }
 
-        private void txtZipcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            nonNumber = validator.IsNumber(e);
-        }
 
         private void txtPhone_Leave(object sender, EventArgs e)
         {
@@ -453,28 +456,19 @@ namespace ThunderPunch
             }
         }
 
-        private void txtDayDOB_KeyDown(object sender, KeyEventArgs e)
-        {
-            nonNumber = validator.IsNumber(e);
-        }
-
         //verify that there is a nonnumber pressed 
         //then check to see if a special character like a '!' was pressed
         //by checking if it is not an integer and not the backspace.
         private void txtDayDOB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (nonNumber || (!char.IsDigit(e.KeyChar)&& e.KeyChar !=(char)Keys.Back)) e.Handled = true;
+            if (!char.IsDigit(e.KeyChar)&& e.KeyChar !=(char)Keys.Back) e.Handled = true;
         }
 
         private void txtYearDOB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (nonNumber || (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)) e.Handled = true;
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back) e.Handled = true;
         }
 
-        private void txtYearDOB_KeyDown(object sender, KeyEventArgs e)
-        {
-            nonNumber = validator.IsNumber(e);
-        }
         private void txtPhone_Enter(object sender, EventArgs e)
         {
             string phone = txtPhone.Text;
@@ -487,6 +481,55 @@ namespace ThunderPunch
                     if (char.IsDigit(c)) txtPhone.Text += c.ToString();
                 }
             }
+        }
+
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+            // verify first that login is 4 digits
+            // check to see if Attempted Login Id Exists in DB already
+            if (validator.FourDigits(txtLogin.Text))
+            {
+                SQL_Interact sql = new SQL_Interact();
+                if (sql.ValidLogin(txtLogin.Text) != null) lblLoginError.Text = "Login Taken";
+                else
+                {
+                    lblLoginError.Text = "Login Available!";
+
+                }
+            }
+            else
+            {
+                lblLoginError.Text = "Must be 4 Digits";
+            }
+        }
+        private void btnRandom_Click(object sender, EventArgs e)
+        {
+            //clear exist error if there, then get a four digit number
+            lblLoginError.Text = "";
+            SQL_Interact sql = new SQL_Interact();
+            string login = RandomLogin();
+            if (sql.ValidLogin(login) != null) btnRandom.PerformClick();
+            else txtLogin.Text = login;
+        }
+
+        private void txtLogin_Enter(object sender, EventArgs e)
+        {
+            lblLoginError.Text = "";
+        }
+
+        private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back) e.Handled = true;
+        }
+
+        private string RandomLogin()
+        {
+            //number between 0000 and 9999
+            // find the four digit number, flesh it out with '0' if single, double, or triple digits
+            int min=0;
+            int max=9999;
+            Random rdm = new Random();
+            return (rdm.Next(min, max)).ToString().PadLeft(4,'0');            
         }
     }        
 }

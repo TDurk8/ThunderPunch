@@ -30,6 +30,14 @@
         {
             this.tbctrlUser = new System.Windows.Forms.TabControl();
             this.tabUserPersonalInfo = new System.Windows.Forms.TabPage();
+            this.grpCompanyRole = new System.Windows.Forms.GroupBox();
+            this.lblLoginError = new System.Windows.Forms.Label();
+            this.btnRandom = new System.Windows.Forms.Button();
+            this.btnCheck = new System.Windows.Forms.Button();
+            this.lblLoginID = new System.Windows.Forms.Label();
+            this.txtLogin = new System.Windows.Forms.TextBox();
+            this.grpSocialMedia = new System.Windows.Forms.GroupBox();
+            this.grpPersonalInfo = new System.Windows.Forms.GroupBox();
             this.lblPhoneError = new System.Windows.Forms.Label();
             this.lblZipError = new System.Windows.Forms.Label();
             this.lblNameError = new System.Windows.Forms.Label();
@@ -37,12 +45,9 @@
             this.lblDOBError = new System.Windows.Forms.Label();
             this.txtYearDOB = new System.Windows.Forms.TextBox();
             this.txtDayDOB = new System.Windows.Forms.TextBox();
-            this.btnClear = new System.Windows.Forms.Button();
             this.lblPhone = new System.Windows.Forms.Label();
-            this.lblZip = new System.Windows.Forms.Label();
             this.txtZipcode = new System.Windows.Forms.TextBox();
             this.cmboState = new System.Windows.Forms.ComboBox();
-            this.lblState = new System.Windows.Forms.Label();
             this.txtCity = new System.Windows.Forms.TextBox();
             this.lblCity = new System.Windows.Forms.Label();
             this.txtAddress2 = new System.Windows.Forms.TextBox();
@@ -57,10 +62,13 @@
             this.txtLName = new System.Windows.Forms.TextBox();
             this.txtFName = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
+            this.lblState = new System.Windows.Forms.Label();
+            this.lblZip = new System.Windows.Forms.Label();
+            this.btnClear = new System.Windows.Forms.Button();
             this.tbNew = new System.Windows.Forms.TabPage();
-            this.grpPersonalInfo = new System.Windows.Forms.GroupBox();
             this.tbctrlUser.SuspendLayout();
             this.tabUserPersonalInfo.SuspendLayout();
+            this.grpCompanyRole.SuspendLayout();
             this.grpPersonalInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,7 +88,7 @@
             this.tbctrlUser.Name = "tbctrlUser";
             this.tbctrlUser.Padding = new System.Drawing.Point(0, 0);
             this.tbctrlUser.SelectedIndex = 0;
-            this.tbctrlUser.Size = new System.Drawing.Size(854, 443);
+            this.tbctrlUser.Size = new System.Drawing.Size(876, 609);
             this.tbctrlUser.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tbctrlUser.TabIndex = 0;
             // 
@@ -88,14 +96,137 @@
             // 
             this.tabUserPersonalInfo.BackColor = System.Drawing.Color.Gray;
             this.tabUserPersonalInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabUserPersonalInfo.Controls.Add(this.grpCompanyRole);
+            this.tabUserPersonalInfo.Controls.Add(this.grpSocialMedia);
             this.tabUserPersonalInfo.Controls.Add(this.grpPersonalInfo);
             this.tabUserPersonalInfo.Controls.Add(this.btnClear);
             this.tabUserPersonalInfo.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabUserPersonalInfo.Location = new System.Drawing.Point(107, 4);
             this.tabUserPersonalInfo.Margin = new System.Windows.Forms.Padding(0);
             this.tabUserPersonalInfo.Name = "tabUserPersonalInfo";
-            this.tabUserPersonalInfo.Size = new System.Drawing.Size(743, 435);
+            this.tabUserPersonalInfo.Size = new System.Drawing.Size(765, 601);
             this.tabUserPersonalInfo.TabIndex = 0;
+            // 
+            // grpCompanyRole
+            // 
+            this.grpCompanyRole.Controls.Add(this.lblLoginError);
+            this.grpCompanyRole.Controls.Add(this.btnRandom);
+            this.grpCompanyRole.Controls.Add(this.btnCheck);
+            this.grpCompanyRole.Controls.Add(this.lblLoginID);
+            this.grpCompanyRole.Controls.Add(this.txtLogin);
+            this.grpCompanyRole.ForeColor = System.Drawing.Color.PaleGreen;
+            this.grpCompanyRole.Location = new System.Drawing.Point(7, 280);
+            this.grpCompanyRole.Name = "grpCompanyRole";
+            this.grpCompanyRole.Size = new System.Drawing.Size(443, 280);
+            this.grpCompanyRole.TabIndex = 31;
+            this.grpCompanyRole.TabStop = false;
+            this.grpCompanyRole.Text = "Company Role";
+            // 
+            // lblLoginError
+            // 
+            this.lblLoginError.AutoSize = true;
+            this.lblLoginError.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoginError.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblLoginError.Location = new System.Drawing.Point(273, 31);
+            this.lblLoginError.Name = "lblLoginError";
+            this.lblLoginError.Size = new System.Drawing.Size(70, 20);
+            this.lblLoginError.TabIndex = 6;
+            this.lblLoginError.Text = "Login Error";
+            // 
+            // btnRandom
+            // 
+            this.btnRandom.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRandom.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnRandom.Location = new System.Drawing.Point(206, 26);
+            this.btnRandom.Name = "btnRandom";
+            this.btnRandom.Size = new System.Drawing.Size(61, 31);
+            this.btnRandom.TabIndex = 5;
+            this.btnRandom.Text = "Random";
+            this.btnRandom.UseVisualStyleBackColor = true;
+            this.btnRandom.Click += new System.EventHandler(this.btnRandom_Click);
+            // 
+            // btnCheck
+            // 
+            this.btnCheck.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCheck.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCheck.Location = new System.Drawing.Point(139, 26);
+            this.btnCheck.Name = "btnCheck";
+            this.btnCheck.Size = new System.Drawing.Size(61, 31);
+            this.btnCheck.TabIndex = 4;
+            this.btnCheck.Text = "Check";
+            this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
+            // 
+            // lblLoginID
+            // 
+            this.lblLoginID.AutoSize = true;
+            this.lblLoginID.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoginID.ForeColor = System.Drawing.Color.White;
+            this.lblLoginID.Location = new System.Drawing.Point(30, 31);
+            this.lblLoginID.Name = "lblLoginID";
+            this.lblLoginID.Size = new System.Drawing.Size(58, 20);
+            this.lblLoginID.TabIndex = 2;
+            this.lblLoginID.Text = "Login ID";
+            // 
+            // txtLogin
+            // 
+            this.txtLogin.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLogin.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtLogin.Location = new System.Drawing.Point(93, 28);
+            this.txtLogin.MaxLength = 4;
+            this.txtLogin.Name = "txtLogin";
+            this.txtLogin.Size = new System.Drawing.Size(40, 26);
+            this.txtLogin.TabIndex = 3;
+            this.txtLogin.Text = "8888";
+            this.txtLogin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtLogin.Enter += new System.EventHandler(this.txtLogin_Enter);
+            this.txtLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLogin_KeyPress);
+            // 
+            // grpSocialMedia
+            // 
+            this.grpSocialMedia.ForeColor = System.Drawing.Color.PaleGreen;
+            this.grpSocialMedia.Location = new System.Drawing.Point(456, 3);
+            this.grpSocialMedia.Name = "grpSocialMedia";
+            this.grpSocialMedia.Size = new System.Drawing.Size(296, 271);
+            this.grpSocialMedia.TabIndex = 1;
+            this.grpSocialMedia.TabStop = false;
+            this.grpSocialMedia.Text = "Social Media";
+            // 
+            // grpPersonalInfo
+            // 
+            this.grpPersonalInfo.Controls.Add(this.lblPhoneError);
+            this.grpPersonalInfo.Controls.Add(this.lblZipError);
+            this.grpPersonalInfo.Controls.Add(this.lblNameError);
+            this.grpPersonalInfo.Controls.Add(this.lblEmailError);
+            this.grpPersonalInfo.Controls.Add(this.lblDOBError);
+            this.grpPersonalInfo.Controls.Add(this.txtYearDOB);
+            this.grpPersonalInfo.Controls.Add(this.txtDayDOB);
+            this.grpPersonalInfo.Controls.Add(this.lblPhone);
+            this.grpPersonalInfo.Controls.Add(this.txtZipcode);
+            this.grpPersonalInfo.Controls.Add(this.cmboState);
+            this.grpPersonalInfo.Controls.Add(this.txtCity);
+            this.grpPersonalInfo.Controls.Add(this.lblCity);
+            this.grpPersonalInfo.Controls.Add(this.txtAddress2);
+            this.grpPersonalInfo.Controls.Add(this.lblAddress2);
+            this.grpPersonalInfo.Controls.Add(this.txtAddress1);
+            this.grpPersonalInfo.Controls.Add(this.lblAddress1);
+            this.grpPersonalInfo.Controls.Add(this.cmboDOBMonth);
+            this.grpPersonalInfo.Controls.Add(this.lblBirthday);
+            this.grpPersonalInfo.Controls.Add(this.txtEmail);
+            this.grpPersonalInfo.Controls.Add(this.lblEmail);
+            this.grpPersonalInfo.Controls.Add(this.lblName);
+            this.grpPersonalInfo.Controls.Add(this.txtLName);
+            this.grpPersonalInfo.Controls.Add(this.txtFName);
+            this.grpPersonalInfo.Controls.Add(this.txtPhone);
+            this.grpPersonalInfo.Controls.Add(this.lblState);
+            this.grpPersonalInfo.Controls.Add(this.lblZip);
+            this.grpPersonalInfo.ForeColor = System.Drawing.Color.PaleGreen;
+            this.grpPersonalInfo.Location = new System.Drawing.Point(7, 3);
+            this.grpPersonalInfo.Name = "grpPersonalInfo";
+            this.grpPersonalInfo.Size = new System.Drawing.Size(443, 271);
+            this.grpPersonalInfo.TabIndex = 30;
+            this.grpPersonalInfo.TabStop = false;
+            this.grpPersonalInfo.Text = "Personal Info";
             // 
             // lblPhoneError
             // 
@@ -164,7 +295,6 @@
             this.txtYearDOB.TabIndex = 6;
             this.txtYearDOB.Text = "  Year";
             this.txtYearDOB.Enter += new System.EventHandler(this.txtYearDOB_Enter);
-            this.txtYearDOB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtYearDOB_KeyDown);
             this.txtYearDOB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYearDOB_KeyPress);
             this.txtYearDOB.Leave += new System.EventHandler(this.txtYearDOB_Leave);
             // 
@@ -179,19 +309,8 @@
             this.txtDayDOB.TabIndex = 5;
             this.txtDayDOB.Text = "  Day";
             this.txtDayDOB.Enter += new System.EventHandler(this.txtDayDOB_Enter);
-            this.txtDayDOB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDayDOB_KeyDown);
             this.txtDayDOB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDayDOB_KeyPress);
             this.txtDayDOB.Leave += new System.EventHandler(this.txtDayDOB_Leave);
-            // 
-            // btnClear
-            // 
-            this.btnClear.Location = new System.Drawing.Point(66, 397);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 35);
-            this.btnClear.TabIndex = 13;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // lblPhone
             // 
@@ -204,17 +323,6 @@
             this.lblPhone.TabIndex = 25;
             this.lblPhone.Text = "Phone";
             // 
-            // lblZip
-            // 
-            this.lblZip.AutoSize = true;
-            this.lblZip.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZip.ForeColor = System.Drawing.Color.White;
-            this.lblZip.Location = new System.Drawing.Point(276, 225);
-            this.lblZip.Name = "lblZip";
-            this.lblZip.Size = new System.Drawing.Size(27, 20);
-            this.lblZip.TabIndex = 24;
-            this.lblZip.Text = "Zip";
-            // 
             // txtZipcode
             // 
             this.txtZipcode.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -224,7 +332,6 @@
             this.txtZipcode.Size = new System.Drawing.Size(44, 26);
             this.txtZipcode.TabIndex = 12;
             this.txtZipcode.Text = "88888";
-            this.txtZipcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtZipcode_KeyDown);
             this.txtZipcode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtZipcode_KeyPress);
             this.txtZipcode.Leave += new System.EventHandler(this.txtZipcode_Leave);
             // 
@@ -239,17 +346,6 @@
             this.cmboState.Name = "cmboState";
             this.cmboState.Size = new System.Drawing.Size(45, 28);
             this.cmboState.TabIndex = 11;
-            // 
-            // lblState
-            // 
-            this.lblState.AutoSize = true;
-            this.lblState.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblState.ForeColor = System.Drawing.Color.White;
-            this.lblState.Location = new System.Drawing.Point(197, 225);
-            this.lblState.Name = "lblState";
-            this.lblState.Size = new System.Drawing.Size(39, 20);
-            this.lblState.TabIndex = 21;
-            this.lblState.Text = "State";
             // 
             // txtCity
             // 
@@ -411,9 +507,40 @@
             this.txtPhone.Size = new System.Drawing.Size(132, 26);
             this.txtPhone.TabIndex = 7;
             this.txtPhone.Enter += new System.EventHandler(this.txtPhone_Enter);
-            this.txtPhone.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPhone_KeyDown);
             this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPhone_KeyPress);
             this.txtPhone.Leave += new System.EventHandler(this.txtPhone_Leave);
+            // 
+            // lblState
+            // 
+            this.lblState.AutoSize = true;
+            this.lblState.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblState.ForeColor = System.Drawing.Color.White;
+            this.lblState.Location = new System.Drawing.Point(197, 225);
+            this.lblState.Name = "lblState";
+            this.lblState.Size = new System.Drawing.Size(39, 20);
+            this.lblState.TabIndex = 21;
+            this.lblState.Text = "State";
+            // 
+            // lblZip
+            // 
+            this.lblZip.AutoSize = true;
+            this.lblZip.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblZip.ForeColor = System.Drawing.Color.White;
+            this.lblZip.Location = new System.Drawing.Point(276, 225);
+            this.lblZip.Name = "lblZip";
+            this.lblZip.Size = new System.Drawing.Size(27, 20);
+            this.lblZip.TabIndex = 24;
+            this.lblZip.Text = "Zip";
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(7, 566);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 35);
+            this.btnClear.TabIndex = 13;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // tbNew
             // 
@@ -423,45 +550,9 @@
             this.tbNew.Location = new System.Drawing.Point(107, 4);
             this.tbNew.Margin = new System.Windows.Forms.Padding(0);
             this.tbNew.Name = "tbNew";
-            this.tbNew.Size = new System.Drawing.Size(743, 435);
+            this.tbNew.Size = new System.Drawing.Size(765, 601);
             this.tbNew.TabIndex = 1;
             this.tbNew.Text = "New Employee";
-            // 
-            // grpPersonalInfo
-            // 
-            this.grpPersonalInfo.Controls.Add(this.lblPhoneError);
-            this.grpPersonalInfo.Controls.Add(this.lblZipError);
-            this.grpPersonalInfo.Controls.Add(this.lblNameError);
-            this.grpPersonalInfo.Controls.Add(this.lblEmailError);
-            this.grpPersonalInfo.Controls.Add(this.lblDOBError);
-            this.grpPersonalInfo.Controls.Add(this.txtYearDOB);
-            this.grpPersonalInfo.Controls.Add(this.txtDayDOB);
-            this.grpPersonalInfo.Controls.Add(this.lblPhone);
-            this.grpPersonalInfo.Controls.Add(this.txtZipcode);
-            this.grpPersonalInfo.Controls.Add(this.cmboState);
-            this.grpPersonalInfo.Controls.Add(this.txtCity);
-            this.grpPersonalInfo.Controls.Add(this.lblCity);
-            this.grpPersonalInfo.Controls.Add(this.txtAddress2);
-            this.grpPersonalInfo.Controls.Add(this.lblAddress2);
-            this.grpPersonalInfo.Controls.Add(this.txtAddress1);
-            this.grpPersonalInfo.Controls.Add(this.lblAddress1);
-            this.grpPersonalInfo.Controls.Add(this.cmboDOBMonth);
-            this.grpPersonalInfo.Controls.Add(this.lblBirthday);
-            this.grpPersonalInfo.Controls.Add(this.txtEmail);
-            this.grpPersonalInfo.Controls.Add(this.lblEmail);
-            this.grpPersonalInfo.Controls.Add(this.lblName);
-            this.grpPersonalInfo.Controls.Add(this.txtLName);
-            this.grpPersonalInfo.Controls.Add(this.txtFName);
-            this.grpPersonalInfo.Controls.Add(this.txtPhone);
-            this.grpPersonalInfo.Controls.Add(this.lblState);
-            this.grpPersonalInfo.Controls.Add(this.lblZip);
-            this.grpPersonalInfo.ForeColor = System.Drawing.Color.PaleGreen;
-            this.grpPersonalInfo.Location = new System.Drawing.Point(7, 3);
-            this.grpPersonalInfo.Name = "grpPersonalInfo";
-            this.grpPersonalInfo.Size = new System.Drawing.Size(443, 271);
-            this.grpPersonalInfo.TabIndex = 30;
-            this.grpPersonalInfo.TabStop = false;
-            this.grpPersonalInfo.Text = "Personal Info";
             // 
             // ModifyUserForm
             // 
@@ -474,6 +565,8 @@
             this.Text = "ModifyUserForm";
             this.tbctrlUser.ResumeLayout(false);
             this.tabUserPersonalInfo.ResumeLayout(false);
+            this.grpCompanyRole.ResumeLayout(false);
+            this.grpCompanyRole.PerformLayout();
             this.grpPersonalInfo.ResumeLayout(false);
             this.grpPersonalInfo.PerformLayout();
             this.ResumeLayout(false);
@@ -513,5 +606,12 @@
         private System.Windows.Forms.Label lblZipError;
         private System.Windows.Forms.Label lblPhoneError;
         private System.Windows.Forms.GroupBox grpPersonalInfo;
+        private System.Windows.Forms.GroupBox grpCompanyRole;
+        private System.Windows.Forms.Label lblLoginID;
+        private System.Windows.Forms.TextBox txtLogin;
+        private System.Windows.Forms.GroupBox grpSocialMedia;
+        private System.Windows.Forms.Button btnCheck;
+        private System.Windows.Forms.Button btnRandom;
+        private System.Windows.Forms.Label lblLoginError;
     }
 }

@@ -13,6 +13,7 @@ namespace ThunderPunch
     {
         public bool FourDigits(string punch)
         {
+            
             if (punch.Length != 4) return false;
             return true;
         }
@@ -63,23 +64,5 @@ namespace ThunderPunch
             if (zipcode.Length == 5 && int.TryParse(zipcode,out zip)&& zip >0) return true;
             else return false;
         }
-
-        public bool IsNumber(KeyEventArgs e)
-        {
-            if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
-            {
-                if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
-                {
-                    if (e.KeyCode != Keys.Back)
-                    {
-                        
-                        //MessageBox.Show(e.KeyCode.ToString());
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
     }
 }
