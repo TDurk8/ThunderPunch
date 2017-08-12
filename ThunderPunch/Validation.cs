@@ -48,11 +48,26 @@ namespace ThunderPunch
             if (int.TryParse(day, out dobDay) && int.TryParse(year,out dobYear))
             {
                 //verify that a semi reasonable year is picked.
-                if ((DateTime.Now.Year - dobYear) > 18 && (DateTime.Now.Year - dobYear) < 120)
+                if (((DateTime.Now.Year - dobYear) < 18) && ((DateTime.Now.Year - dobYear) < 120))
                 {
                     if (dobDay > 0 && dobDay <= DateTime.DaysInMonth(dobYear, month+1)) return true;
                     else return false;
                 }
+                else return false;
+            }
+            else return false;
+        }
+
+        public bool IsValidHireDate(int month, string day, string year)
+        {
+            int dobDay;
+            int dobYear;
+            month++;
+            if (int.TryParse(day, out dobDay) && int.TryParse(year, out dobYear))
+            {
+                //verify date is in the past or today's date
+                DateTime hiredate = new DateTime(dobYear, month, dobDay);
+                if (hiredate > DateTime.Today) return true;
                 else return false;
             }
             else return false;

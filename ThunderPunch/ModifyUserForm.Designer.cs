@@ -31,6 +31,11 @@
             this.tbctrlUser = new System.Windows.Forms.TabControl();
             this.tabUserPersonalInfo = new System.Windows.Forms.TabPage();
             this.grpCompanyRole = new System.Windows.Forms.GroupBox();
+            this.lblDateHiredError = new System.Windows.Forms.Label();
+            this.txtYearHired = new System.Windows.Forms.TextBox();
+            this.txtDayHired = new System.Windows.Forms.TextBox();
+            this.cmbDateHired = new System.Windows.Forms.ComboBox();
+            this.lblDateHired = new System.Windows.Forms.Label();
             this.lblLoginError = new System.Windows.Forms.Label();
             this.btnRandom = new System.Windows.Forms.Button();
             this.btnCheck = new System.Windows.Forms.Button();
@@ -109,6 +114,11 @@
             // 
             // grpCompanyRole
             // 
+            this.grpCompanyRole.Controls.Add(this.lblDateHiredError);
+            this.grpCompanyRole.Controls.Add(this.txtYearHired);
+            this.grpCompanyRole.Controls.Add(this.txtDayHired);
+            this.grpCompanyRole.Controls.Add(this.cmbDateHired);
+            this.grpCompanyRole.Controls.Add(this.lblDateHired);
             this.grpCompanyRole.Controls.Add(this.lblLoginError);
             this.grpCompanyRole.Controls.Add(this.btnRandom);
             this.grpCompanyRole.Controls.Add(this.btnCheck);
@@ -121,6 +131,81 @@
             this.grpCompanyRole.TabIndex = 31;
             this.grpCompanyRole.TabStop = false;
             this.grpCompanyRole.Text = "Company Role";
+            this.grpCompanyRole.Enter += new System.EventHandler(this.grpCompanyRole_Enter);
+            // 
+            // lblDateHiredError
+            // 
+            this.lblDateHiredError.AutoSize = true;
+            this.lblDateHiredError.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDateHiredError.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblDateHiredError.Location = new System.Drawing.Point(349, 67);
+            this.lblDateHiredError.Name = "lblDateHiredError";
+            this.lblDateHiredError.Size = new System.Drawing.Size(86, 20);
+            this.lblDateHiredError.TabIndex = 28;
+            this.lblDateHiredError.Text = "Invalid Name";
+            // 
+            // txtYearHired
+            // 
+            this.txtYearHired.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtYearHired.ForeColor = System.Drawing.Color.DarkGray;
+            this.txtYearHired.Location = new System.Drawing.Point(284, 65);
+            this.txtYearHired.MaxLength = 4;
+            this.txtYearHired.Name = "txtYearHired";
+            this.txtYearHired.Size = new System.Drawing.Size(61, 26);
+            this.txtYearHired.TabIndex = 11;
+            this.txtYearHired.Text = "  Year";
+            this.txtYearHired.Enter += new System.EventHandler(this.txtYearHired_Enter);
+            this.txtYearHired.Leave += new System.EventHandler(this.txtYearHired_Leave);
+            // 
+            // txtDayHired
+            // 
+            this.txtDayHired.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDayHired.ForeColor = System.Drawing.Color.DarkGray;
+            this.txtDayHired.Location = new System.Drawing.Point(212, 65);
+            this.txtDayHired.MaxLength = 2;
+            this.txtDayHired.Name = "txtDayHired";
+            this.txtDayHired.Size = new System.Drawing.Size(45, 26);
+            this.txtDayHired.TabIndex = 10;
+            this.txtDayHired.Text = "  Day";
+            this.txtDayHired.Enter += new System.EventHandler(this.txtDayHired_Enter);
+            this.txtDayHired.Leave += new System.EventHandler(this.txtDayHired_Leave);
+            // 
+            // cmbDateHired
+            // 
+            this.cmbDateHired.DropDownHeight = 200;
+            this.cmbDateHired.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDateHired.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDateHired.FormattingEnabled = true;
+            this.cmbDateHired.IntegralHeight = false;
+            this.cmbDateHired.Items.AddRange(new object[] {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"});
+            this.cmbDateHired.Location = new System.Drawing.Point(93, 64);
+            this.cmbDateHired.MaxDropDownItems = 15;
+            this.cmbDateHired.Name = "cmbDateHired";
+            this.cmbDateHired.Size = new System.Drawing.Size(92, 28);
+            this.cmbDateHired.TabIndex = 9;
+            // 
+            // lblDateHired
+            // 
+            this.lblDateHired.AutoSize = true;
+            this.lblDateHired.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDateHired.ForeColor = System.Drawing.Color.White;
+            this.lblDateHired.Location = new System.Drawing.Point(7, 68);
+            this.lblDateHired.Name = "lblDateHired";
+            this.lblDateHired.Size = new System.Drawing.Size(81, 20);
+            this.lblDateHired.TabIndex = 12;
+            this.lblDateHired.Text = "Date of Birth";
             // 
             // lblLoginError
             // 
@@ -227,6 +312,7 @@
             this.grpPersonalInfo.TabIndex = 30;
             this.grpPersonalInfo.TabStop = false;
             this.grpPersonalInfo.Text = "Personal Info";
+            this.grpPersonalInfo.Enter += new System.EventHandler(this.grpPersonalInfo_Enter);
             // 
             // lblPhoneError
             // 
@@ -332,6 +418,7 @@
             this.txtZipcode.Size = new System.Drawing.Size(44, 26);
             this.txtZipcode.TabIndex = 12;
             this.txtZipcode.Text = "88888";
+            this.txtZipcode.Enter += new System.EventHandler(this.txtZipcode_Enter);
             this.txtZipcode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtZipcode_KeyPress);
             this.txtZipcode.Leave += new System.EventHandler(this.txtZipcode_Leave);
             // 
@@ -354,6 +441,7 @@
             this.txtCity.Name = "txtCity";
             this.txtCity.Size = new System.Drawing.Size(107, 26);
             this.txtCity.TabIndex = 10;
+            this.txtCity.Enter += new System.EventHandler(this.txtCity_Enter);
             // 
             // lblCity
             // 
@@ -373,6 +461,7 @@
             this.txtAddress2.Name = "txtAddress2";
             this.txtAddress2.Size = new System.Drawing.Size(252, 26);
             this.txtAddress2.TabIndex = 9;
+            this.txtAddress2.Enter += new System.EventHandler(this.txtAddress2_Enter);
             // 
             // lblAddress2
             // 
@@ -392,6 +481,7 @@
             this.txtAddress1.Name = "txtAddress1";
             this.txtAddress1.Size = new System.Drawing.Size(252, 26);
             this.txtAddress1.TabIndex = 8;
+            this.txtAddress1.Enter += new System.EventHandler(this.txtAddress1_Enter);
             // 
             // lblAddress1
             // 
@@ -449,6 +539,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(252, 26);
             this.txtEmail.TabIndex = 3;
+            this.txtEmail.Enter += new System.EventHandler(this.txtEmail_Enter);
             this.txtEmail.Leave += new System.EventHandler(this.txtEmail_Leave);
             // 
             // lblEmail
@@ -613,5 +704,10 @@
         private System.Windows.Forms.Button btnCheck;
         private System.Windows.Forms.Button btnRandom;
         private System.Windows.Forms.Label lblLoginError;
+        private System.Windows.Forms.Label lblDateHiredError;
+        private System.Windows.Forms.TextBox txtYearHired;
+        private System.Windows.Forms.TextBox txtDayHired;
+        private System.Windows.Forms.ComboBox cmbDateHired;
+        private System.Windows.Forms.Label lblDateHired;
     }
 }

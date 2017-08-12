@@ -13,6 +13,7 @@ namespace ThunderPunch
 {
     public partial class ModifyUserForm : Form
     {
+        //setup objects for validation and format
         private Validation validator = new Validation();
         private FormatText textFormater = new FormatText();
         
@@ -69,7 +70,7 @@ namespace ThunderPunch
 
         private void SetUserForm()
         {
-            
+            //properly setup form for new user
             SetStateList();
             txtFName.Text="  First";
             txtLName.Text = "  Last";
@@ -103,9 +104,14 @@ namespace ThunderPunch
             txtYearDOB.Font = new Font(txtYearDOB.Font, FontStyle.Italic);
             lblLoginError.Text = "";
             txtLogin.Clear();
+            lblDateHiredError.Text = "";
+            txtYearHired.Text="  Year";
+            txtDayHired.Text="  Day";
+            cmbDateHired.SelectedIndex = -1;
         }
         public enum State
         {
+            //State Combobox
             [Description("Alabama")]
             AL,
 
@@ -262,6 +268,7 @@ namespace ThunderPunch
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            //Clear form for new user
             SetUserForm();
         }
 
@@ -289,22 +296,24 @@ namespace ThunderPunch
 
         private void txtFName_Enter(object sender, EventArgs e)
         {
-            if(txtFName.Text == "  First")
-            {
-                txtFName.Text = "";
-                txtFName.ForeColor = System.Drawing.Color.Black;
-                txtFName.Font = new Font(txtFName.Font, FontStyle.Regular);
-            }
+            //if(txtFName.Text == "  First")
+            //{
+            //    txtFName.Text = "";
+            //    txtFName.ForeColor = System.Drawing.Color.Black;
+            //    txtFName.Font = new Font(txtFName.Font, FontStyle.Regular);
+            //}
+            textFormater.TextBoxEnter(txtFName, "  First");
         }
 
         private void txtLName_Enter(object sender, EventArgs e)
         {
-            if (txtLName.Text == "  Last")
-            {
-                txtLName.Text = "";
-                txtLName.ForeColor = System.Drawing.Color.Black;
-                txtLName.Font = new Font(txtLName.Font, FontStyle.Regular);
-            }
+            //if (txtLName.Text == "  Last")
+            //{
+            //    txtLName.Text = "";
+            //    txtLName.ForeColor = System.Drawing.Color.Black;
+            //    txtLName.Font = new Font(txtLName.Font, FontStyle.Regular);
+            //}
+            textFormater.TextBoxEnter(txtLName, "  Last");
         }
 
         private void txtLName_Leave(object sender, EventArgs e)
@@ -363,16 +372,7 @@ namespace ThunderPunch
 
         private void txtDayDOB_Enter(object sender, EventArgs e)
         {
-            if (txtDayDOB.Text == "  Day")
-            {
-                txtDayDOB.Text = "";
-                txtDayDOB.ForeColor = System.Drawing.Color.Black;
-                txtDayDOB.Font = new Font(txtDayDOB.Font, FontStyle.Regular);
-            }
-            else
-            {
-                lblDOBError.Text = "";
-            }
+            textFormater.TextBoxEnter(txtDayDOB, "  Day");
         }
 
         private void txtYearDOB_Leave(object sender, EventArgs e)
@@ -396,16 +396,7 @@ namespace ThunderPunch
 
         private void txtYearDOB_Enter(object sender, EventArgs e)
         {
-            if (txtYearDOB.Text == "  Year")
-            {
-                txtYearDOB.Text = "";
-                txtYearDOB.ForeColor = System.Drawing.Color.Black;
-                txtYearDOB.Font = new Font(txtYearDOB.Font, FontStyle.Regular);
-            }
-            else
-            {
-                lblDOBError.Text = "";
-            }
+            textFormater.TextBoxEnter(txtYearDOB, "  Year");
         }
 
         private void cmboDOBMonth_SelectionChangeCommitted(object sender, EventArgs e)
@@ -455,7 +446,6 @@ namespace ThunderPunch
                 txtPhone.Focus();
             }
         }
-
         //verify that there is a nonnumber pressed 
         //then check to see if a special character like a '!' was pressed
         //by checking if it is not an integer and not the backspace.
@@ -471,8 +461,9 @@ namespace ThunderPunch
 
         private void txtPhone_Enter(object sender, EventArgs e)
         {
+            //if phone number is in text box already, remove formatting
             string phone = txtPhone.Text;
-
+            textFormater.TextBoxEnter(txtPhone,"");
             if (phone.Count() == 13 && phone.Substring(0, 1) == "(" && phone.Substring(4, 1) == ")" && phone.Substring(8, 1) == "-")
             {
                 txtPhone.Clear();
@@ -514,7 +505,8 @@ namespace ThunderPunch
 
         private void txtLogin_Enter(object sender, EventArgs e)
         {
-            lblLoginError.Text = "";
+            textFormater.TextBoxEnter(txtLogin, "");
+            this.AcceptButton = btnCheck;
         }
 
         private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
@@ -530,6 +522,100 @@ namespace ThunderPunch
             int max=9999;
             Random rdm = new Random();
             return (rdm.Next(min, max)).ToString().PadLeft(4,'0');            
+        }
+
+        private void grpPersonalInfo_Enter(object sender, EventArgs e)
+        {
+            this.AcceptButton = btnClear;
+        }
+
+        private void grpCompanyRole_Enter(object sender, EventArgs e)
+        {
+            this.AcceptButton = btnCheck;
+        }
+
+        private void txtDayHired_Leave(object sender, EventArgs e)
+        {
+            HireDateLeave(txtDayHired,"  Day");
+        }
+
+        private void txtYearHired_Leave(object sender, EventArgs e)
+        {
+            HireDateLeave(txtYearHired, "  Year");
+        }
+
+        private void txtDayHired_Enter(object sender, EventArgs e)
+        {
+            textFormater.TextBoxEnter(txtDayHired, "  Day");
+        }
+
+        private void txtYearHired_Enter(object sender, EventArgs e)
+        {
+            textFormater.TextBoxEnter(txtYearHired, "  Year");
+        }
+
+
+        private void HireDateLeave(TextBox tb, string type)
+        {
+            lblDateHiredError.Text = "";
+            tb.Text = tb.Text.Trim();
+            if (tb.Text == "")
+            {
+                tb.Text = type;
+                tb.ForeColor = System.Drawing.Color.DarkGray;
+                tb.Font = new Font(tb.Font, FontStyle.Italic);
+            }
+            else if (txtDayHired.Text != "  Day" && txtYearHired.Text != "  Year" && cmbDateHired.SelectedIndex >= 0)
+            {
+                if (validator.IsValidHireDate(cmbDateHired.SelectedIndex, txtDayHired.Text, txtYearHired.Text))
+                {
+                    lblDateHiredError.Text = "Future Date";
+                }
+                else lblDOBError.Text = "";
+            }
+        }
+
+        private void TextBoxEnter(TextBox tb, string type)
+        {
+            if (tb.Text == type)
+            {
+                tb.Text = "";
+                tb.ForeColor = System.Drawing.Color.Black;
+                tb.Font = new Font(tb.Font, FontStyle.Regular);
+            }
+            else
+            {
+                tb.SelectAll();
+            }
+        }
+        private void TextBoxLeave(TextBox tb, string type)
+        {
+
+        }
+
+        private void txtEmail_Enter(object sender, EventArgs e)
+        {
+            textFormater.TextBoxEnter(txtEmail, "");
+        }
+
+        private void txtAddress1_Enter(object sender, EventArgs e)
+        {
+            textFormater.TextBoxEnter(txtAddress1, "");
+        }
+
+        private void txtAddress2_Enter(object sender, EventArgs e)
+        {
+            textFormater.TextBoxEnter(txtAddress2, "");
+        }
+
+        private void txtCity_Enter(object sender, EventArgs e)
+        {
+            textFormater.TextBoxEnter(txtCity, "");
+        }
+
+        private void txtZipcode_Enter(object sender, EventArgs e)
+        {
+            textFormater.TextBoxEnter(txtZipcode, "");
         }
     }        
 }
