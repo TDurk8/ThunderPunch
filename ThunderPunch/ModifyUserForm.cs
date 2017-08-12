@@ -72,12 +72,12 @@ namespace ThunderPunch
         {
             //properly setup form for new user
             SetStateList();
-            txtFName.Text="  First";
-            txtLName.Text = "  Last";
+            txtFName.Text="First";
+            txtLName.Text = "Last";
             txtEmail.Clear();
             cmboDOBMonth.SelectedIndex = -1;
-            txtDayDOB.Text = "  Day";
-            txtYearDOB.Text = "  Year";
+            txtDayDOB.Text = "Day";
+            txtYearDOB.Text = "Year";
             txtPhone.Clear();
             txtEmail.Clear();
             txtAddress1.Clear();
@@ -102,11 +102,13 @@ namespace ThunderPunch
             txtDayDOB.Font = new Font(txtDayDOB.Font, FontStyle.Italic);
             txtYearDOB.ForeColor = System.Drawing.Color.DarkGray;
             txtYearDOB.Font = new Font(txtYearDOB.Font, FontStyle.Italic);
+            txtDayHired.Font = new Font(txtYearDOB.Font, FontStyle.Italic);
+            txtYearHired.Font = new Font(txtYearDOB.Font, FontStyle.Italic);
             lblLoginError.Text = "";
             txtLogin.Clear();
             lblDateHiredError.Text = "";
-            txtYearHired.Text="  Year";
-            txtDayHired.Text="  Day";
+            txtYearHired.Text="Year";
+            txtDayHired.Text="Day";
             cmbDateHired.SelectedIndex = -1;
         }
         public enum State
@@ -272,153 +274,86 @@ namespace ThunderPunch
             SetUserForm();
         }
 
-
         private void txtFName_Leave(object sender, EventArgs e)
         {
-            txtFName.Text= txtFName.Text.Trim();
-            if (txtFName.Text == "")
-            {
-                txtFName.Text = "  First";
-                txtFName.ForeColor = Color.DarkGray;
-                txtFName.Font = new Font(txtFName.Font, FontStyle.Italic);
-            }
-            else if (!validator.IsAlpha(txtFName.Text))
+            textFormater.TextBoxLeave(txtFName, "First", lblNameError);
+            if (!validator.IsAlpha(txtFName.Text))
             {
                 lblNameError.Text = "Invalid Name";
                 txtFName.Focus();
             }
-            else
-            {
-                lblNameError.Text = "";
-                txtFName.Text = textFormater.ProperName(txtFName.Text);
-            }
+            else txtFName.Text = textFormater.ProperName(txtFName.Text);
         }
 
         private void txtFName_Enter(object sender, EventArgs e)
         {
-            //if(txtFName.Text == "  First")
-            //{
-            //    txtFName.Text = "";
-            //    txtFName.ForeColor = System.Drawing.Color.Black;
-            //    txtFName.Font = new Font(txtFName.Font, FontStyle.Regular);
-            //}
-            textFormater.TextBoxEnter(txtFName, "  First");
+            textFormater.TextBoxEnter(txtFName, "First");
         }
 
         private void txtLName_Enter(object sender, EventArgs e)
         {
-            //if (txtLName.Text == "  Last")
-            //{
-            //    txtLName.Text = "";
-            //    txtLName.ForeColor = System.Drawing.Color.Black;
-            //    txtLName.Font = new Font(txtLName.Font, FontStyle.Regular);
-            //}
-            textFormater.TextBoxEnter(txtLName, "  Last");
+            textFormater.TextBoxEnter(txtLName, "Last");
         }
 
         private void txtLName_Leave(object sender, EventArgs e)
         {
-            txtLName.Text = txtLName.Text.Trim();
-            if (txtLName.Text == "")
-            {
-                txtLName.Text = "  Last";
-                txtLName.ForeColor = System.Drawing.Color.DarkGray;
-                txtLName.Font = new Font(txtFName.Font, FontStyle.Italic);
-            }
-            else if (!validator.IsAlpha(txtLName.Text))
+            textFormater.TextBoxLeave(txtLName, "Last", lblNameError);
+            if (!validator.IsAlpha(txtLName.Text))
             {
                 lblNameError.Text = "Invalid Name";
                 txtLName.Focus();
             }
             else
             {
-                lblNameError.Text = "";
                 txtLName.Text = textFormater.ProperName(txtLName.Text);
             }
         }
 
         private void txtEmail_Leave(object sender, EventArgs e)
         {
-            txtEmail.Text = txtEmail.Text.Trim();
+            textFormater.TextBoxLeave(txtEmail, "", lblEmailError);
             if (!validator.IsEmail(txtEmail.Text.Trim()) && txtEmail.Text.Trim()!= "")
             {
                 lblEmailError.Text = "Invalid Email";
                 txtEmail.Focus();
             }
-            else
-            {
-                lblEmailError.Text = "";
-            }
         }
 
         private void txtDayDOB_Leave(object sender, EventArgs e)
         {
-            txtDayDOB.Text = txtDayDOB.Text.Trim();
-            if (txtDayDOB.Text == "")
-            {
-                txtDayDOB.Text = "  Day";
-                txtDayDOB.ForeColor = System.Drawing.Color.DarkGray;
-                txtDayDOB.Font = new Font(txtDayDOB.Font, FontStyle.Italic);
-            }
-            else if (txtDayDOB.Text!="  Day" && txtYearDOB.Text!="  Year" && cmboDOBMonth.SelectedIndex >= 0)
-            {
-                if (!validator.IsValidDay(cmboDOBMonth.SelectedIndex, txtDayDOB.Text, txtYearDOB.Text))
-                {
-                    lblDOBError.Text = "Invalid DOB";
-                }
-                else lblDOBError.Text = "";
-            }
+            textFormater.TextBoxLeave(txtDayDOB, "Day", lblDOBError);
+
         }
 
         private void txtDayDOB_Enter(object sender, EventArgs e)
         {
-            textFormater.TextBoxEnter(txtDayDOB, "  Day");
+            textFormater.TextBoxEnter(txtDayDOB, "Day");
         }
 
         private void txtYearDOB_Leave(object sender, EventArgs e)
         {
-            txtYearDOB.Text = txtYearDOB.Text.Trim();
-            if (txtYearDOB.Text == "")
-            {
-                txtYearDOB.Text = "  Year";
-                txtYearDOB.ForeColor = System.Drawing.Color.DarkGray;
-                txtYearDOB.Font = new Font(txtYearDOB.Font, FontStyle.Italic);
-            }
-            else if (txtDayDOB.Text != "  Day" && txtYearDOB.Text != "  Year" && cmboDOBMonth.SelectedIndex >= 0)
-            {
-                if (!validator.IsValidDay(cmboDOBMonth.SelectedIndex, txtDayDOB.Text, txtYearDOB.Text))
-                {
-                    lblDOBError.Text = "Invalid DOB";
-                }
-                else lblDOBError.Text = "";
-            }
+            textFormater.TextBoxLeave(txtYearDOB, "Year",lblDOBError);
+            validator.IsValidDOB(cmboDOBMonth.SelectedIndex + 1, txtDayDOB.Text, txtYearDOB.Text, lblDOBError);
         }
 
         private void txtYearDOB_Enter(object sender, EventArgs e)
         {
-            textFormater.TextBoxEnter(txtYearDOB, "  Year");
+            textFormater.TextBoxEnter(txtYearDOB, "Year");
         }
 
         private void cmboDOBMonth_SelectionChangeCommitted(object sender, EventArgs e)
         {
             lblDOBError.Text = "";
-            if (txtDayDOB.Text != "  Day" && txtYearDOB.Text != "  Year" && cmboDOBMonth.SelectedIndex >= 0)
-            {
-                if (!validator.IsValidDay(cmboDOBMonth.SelectedIndex, txtDayDOB.Text, txtYearDOB.Text)) lblDOBError.Text="Invalid DOB";
-                else lblDOBError.Text = "";
-            }
+            validator.IsValidDOB(cmboDOBMonth.SelectedIndex + 1, txtDayDOB.Text, txtYearDOB.Text,lblDOBError);
         }
 
         private void txtZipcode_Leave(object sender, EventArgs e)
         {
+            textFormater.TextBoxLeave(txtZipcode, "", lblZipError);
             if (!validator.IsZip(txtZipcode.Text)&& txtZipcode.Text!="")
             {
                 lblZipError.Text = "Invalid Zip";
                 txtZipcode.Focus();
-            }
-            else
-            {
-                lblZipError.Text = "";
             }
         }
 
@@ -432,13 +367,12 @@ namespace ThunderPunch
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back) e.Handled = true;
         }
 
-
         private void txtPhone_Leave(object sender, EventArgs e)
         {
+            textFormater.TextBoxLeave(txtPhone, "", lblPhoneError);
             if (txtPhone.Text.Count() == 10)
             {
                 txtPhone.Text = textFormater.Phone(txtPhone.Text);
-                lblPhoneError.Text = "";
             }
             else if (txtPhone.Text != "")
             {
@@ -485,7 +419,6 @@ namespace ThunderPunch
                 else
                 {
                     lblLoginError.Text = "Login Available!";
-
                 }
             }
             else
@@ -536,42 +469,34 @@ namespace ThunderPunch
 
         private void txtDayHired_Leave(object sender, EventArgs e)
         {
-            HireDateLeave(txtDayHired,"  Day");
+            textFormater.TextBoxLeave(txtDayHired, "Day", lblDateHiredError);
+            HireDateLeave();
         }
 
         private void txtYearHired_Leave(object sender, EventArgs e)
         {
-            HireDateLeave(txtYearHired, "  Year");
+            textFormater.TextBoxLeave(txtYearHired, "Year", lblDateHiredError);
+            HireDateLeave();
         }
 
         private void txtDayHired_Enter(object sender, EventArgs e)
         {
-            textFormater.TextBoxEnter(txtDayHired, "  Day");
+            textFormater.TextBoxEnter(txtDayHired, "Day");
         }
 
         private void txtYearHired_Enter(object sender, EventArgs e)
         {
-            textFormater.TextBoxEnter(txtYearHired, "  Year");
+            textFormater.TextBoxEnter(txtYearHired, "Year");
         }
 
-
-        private void HireDateLeave(TextBox tb, string type)
+        private void HireDateLeave()
         {
-            lblDateHiredError.Text = "";
-            tb.Text = tb.Text.Trim();
-            if (tb.Text == "")
-            {
-                tb.Text = type;
-                tb.ForeColor = System.Drawing.Color.DarkGray;
-                tb.Font = new Font(tb.Font, FontStyle.Italic);
-            }
-            else if (txtDayHired.Text != "  Day" && txtYearHired.Text != "  Year" && cmbDateHired.SelectedIndex >= 0)
+            if (txtDayHired.Text != "Day" && txtYearHired.Text != "Year" && cmbDateHired.SelectedIndex >= 0)
             {
                 if (validator.IsValidHireDate(cmbDateHired.SelectedIndex, txtDayHired.Text, txtYearHired.Text))
                 {
                     lblDateHiredError.Text = "Future Date";
                 }
-                else lblDOBError.Text = "";
             }
         }
 
@@ -587,10 +512,6 @@ namespace ThunderPunch
             {
                 tb.SelectAll();
             }
-        }
-        private void TextBoxLeave(TextBox tb, string type)
-        {
-
         }
 
         private void txtEmail_Enter(object sender, EventArgs e)

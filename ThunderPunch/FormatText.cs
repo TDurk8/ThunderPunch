@@ -38,9 +38,10 @@ namespace ThunderPunch
             }
         }
 
-        public void TextBoxLeave(TextBox tb, string type)
+        public void TextBoxLeave(TextBox tb, string type, Label error)
         {
             tb.Text.Trim();
+            error.Text = "";
             if (tb.Text == "")
             {
                 tb.Text = type;

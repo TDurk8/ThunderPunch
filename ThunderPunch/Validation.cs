@@ -41,23 +41,34 @@ namespace ThunderPunch
             }
         }
 
-        public bool IsValidDay(int month, string day, string year)
+        public DateTime IsValidDay(int month, string day, string year)
         {
             int dobDay;
             int dobYear;
-            if (int.TryParse(day, out dobDay) && int.TryParse(year,out dobYear))
+            DateTime dob = new DateTime();
+            if (int.TryParse(day, out dobDay) && int.TryParse(year,out dobYear) && dobYear>0 && dobYear<9999)
             {
-                //verify that a semi reasonable year is picked.
-                if (((DateTime.Now.Year - dobYear) < 18) && ((DateTime.Now.Year - dobYear) < 120))
+                if (dobDay > 0 && dobDay <= DateTime.DaysInMonth(dobYear, month))
                 {
-                    if (dobDay > 0 && dobDay <= DateTime.DaysInMonth(dobYear, month+1)) return true;
-                    else return false;
+                    dob = new DateTime(dobYear, month, dobDay);
+                    MessageBox.Show("valid");
                 }
-                else return false;
             }
-            else return false;
+            return dob;
         }
 
+        public bool Is18(int month, string day, string year)
+        {
+            //Make sure employee is 18
+            return false;
+        }
+
+        //public bool IsOldAsDirt(int month, string day, string year)
+        //{
+        //    //make sure employee isn't the oldest person alive
+        //    int ageCutoff = 100;
+        //    return false;
+        //}
         public bool IsValidHireDate(int month, string day, string year)
         {
             int dobDay;
@@ -78,6 +89,23 @@ namespace ThunderPunch
             int zip;
             if (zipcode.Length == 5 && int.TryParse(zipcode,out zip)&& zip >0) return true;
             else return false;
+        }
+
+        public bool IsValidDOB(int month, string day, string year, Label error)
+        {
+            //make sure we don't have the world's oldest person
+            //also validates proper year put in. :)
+            int AgeCutoff = 100;
+            DateTime dob = new DateTime();
+            if (day != "Day" && year != "Year" && month >= 0)
+            {
+                dob = IsValidDay(month, day, year);
+                if (DateTime.Now.Year - dob.Year < AgeCutoff) MessageBox.Show("young enough");
+
+                else error.Text = "Age > 100";
+            }
+            
+            return true;
         }
     }
 }
