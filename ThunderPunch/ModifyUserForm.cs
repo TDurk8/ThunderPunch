@@ -23,6 +23,7 @@ namespace ThunderPunch
             tbctrlUser.DrawItem += new DrawItemEventHandler(tbctrlUser_DrawItem);
             SetStateList();
             SetUserForm();
+            SetDepartment();
         }
 
         private void tbctrlUser_DrawItem(Object sender, DrawItemEventArgs e)
@@ -68,6 +69,13 @@ namespace ThunderPunch
             cmboState.Sorted = true;
         }
 
+        private void SetDepartment()
+        {
+            cmbDept.Items.Clear();
+            
+            
+        }
+
         private void SetUserForm()
         {
             //properly setup form for new user
@@ -110,6 +118,7 @@ namespace ThunderPunch
             txtYearHired.Text="Year";
             txtDayHired.Text="Day";
             cmbDateHired.SelectedIndex = -1;
+
         }
         public enum State
         {
@@ -322,7 +331,6 @@ namespace ThunderPunch
         private void txtDayDOB_Leave(object sender, EventArgs e)
         {
             textFormater.TextBoxLeave(txtDayDOB, "Day", lblDOBError);
-
         }
 
         private void txtDayDOB_Enter(object sender, EventArgs e)
@@ -344,7 +352,7 @@ namespace ThunderPunch
         private void cmboDOBMonth_SelectionChangeCommitted(object sender, EventArgs e)
         {
             lblDOBError.Text = "";
-            validator.IsValidDOB(cmboDOBMonth.SelectedIndex + 1, txtDayDOB.Text, txtYearDOB.Text,lblDOBError);
+            validator.IsValidDOB(cmboDOBMonth.SelectedIndex + 1, txtDayDOB.Text, txtYearDOB.Text, lblDOBError);
         }
 
         private void txtZipcode_Leave(object sender, EventArgs e)
@@ -359,12 +367,12 @@ namespace ThunderPunch
 
         private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back) e.Handled = true;
+            e.Handled = validator.DigitOnly(e);
         }
 
         private void txtZipcode_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back) e.Handled = true;
+            e.Handled = validator.DigitOnly(e);
         }
 
         private void txtPhone_Leave(object sender, EventArgs e)
@@ -385,12 +393,12 @@ namespace ThunderPunch
         //by checking if it is not an integer and not the backspace.
         private void txtDayDOB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar)&& e.KeyChar !=(char)Keys.Back) e.Handled = true;
+            e.Handled = validator.DigitOnly(e);
         }
 
         private void txtYearDOB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back) e.Handled = true;
+            e.Handled = validator.DigitOnly(e);
         }
 
         private void txtPhone_Enter(object sender, EventArgs e)
@@ -444,7 +452,7 @@ namespace ThunderPunch
 
         private void txtLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back) e.Handled = true;
+            e.Handled = validator.DigitOnly(e);
         }
 
         private string RandomLogin()

@@ -47,6 +47,12 @@ namespace ThunderPunch
             return user;
         }
 
+        public List<string> SetDepartments()
+        {
+            var retList = new List<string>();
+            return retList;
+        }
+
         public bool DB_Status()
         {
             

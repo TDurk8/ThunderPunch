@@ -11,6 +11,7 @@ namespace ThunderPunch
 {
     class Validation
     {
+        //confirm 4 digit login
         public bool FourDigits(string punch)
         {
             
@@ -18,12 +19,14 @@ namespace ThunderPunch
             return true;
         }
 
+        //only alpha letters
         public bool IsAlpha(string word)
         {
             if (Regex.IsMatch(word.Trim(), @"^[a-zA-Z]+$"))return true;
             return false;
         }
 
+        //using windows verification, check email
         public bool IsEmail(string email)
         {
             try
@@ -41,6 +44,7 @@ namespace ThunderPunch
             }
         }
 
+        //check for valid date
         public DateTime IsValidDay(int month, string day, string year)
         {
             int dobDay;
@@ -51,24 +55,12 @@ namespace ThunderPunch
                 if (dobDay > 0 && dobDay <= DateTime.DaysInMonth(dobYear, month))
                 {
                     dob = new DateTime(dobYear, month, dobDay);
-                    MessageBox.Show("valid");
                 }
             }
             return dob;
         }
 
-        public bool Is18(int month, string day, string year)
-        {
-            //Make sure employee is 18
-            return false;
-        }
-
-        //public bool IsOldAsDirt(int month, string day, string year)
-        //{
-        //    //make sure employee isn't the oldest person alive
-        //    int ageCutoff = 100;
-        //    return false;
-        //}
+        //no future dates for Hire date
         public bool IsValidHireDate(int month, string day, string year)
         {
             int dobDay;
@@ -84,6 +76,7 @@ namespace ThunderPunch
             else return false;
         }
 
+        //check five digit zip
         public bool IsZip(string zipcode)
         {
             int zip;
@@ -100,12 +93,25 @@ namespace ThunderPunch
             if (day != "Day" && year != "Year" && month >= 0)
             {
                 dob = IsValidDay(month, day, year);
-                if (DateTime.Now.Year - dob.Year < AgeCutoff) MessageBox.Show("young enough");
-
-                else error.Text = "Age > 100";
+                if (DateTime.Now.Year - dob.Year < AgeCutoff)
+                    //if 19 or older don't verify month otherwise if 18 verify exact day
+                    if (DateTime.Now.Year - dob.Year > 18 || (DateTime.Now.Year - dob.Year == 18) && DateTime.Now.Month - month >= 0 && DateTime.Now.Day - dob.Day >= 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        error.Text = "Must Be 18";
+                    }
+                else error.Text = "Age > "+ AgeCutoff;
             }
-            
-            return true;
+            return false;
+        }
+
+        public bool DigitOnly(KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back) return true;
+            else return false;
         }
     }
 }
