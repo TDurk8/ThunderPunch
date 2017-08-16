@@ -47,9 +47,90 @@ namespace ThunderPunch
             return user;
         }
 
+        //set Departments into the dropdown menu from the Database
         public List<string> SetDepartments()
         {
             var retList = new List<string>();
+            SqlCommand command = new SqlCommand("SELECT Department FROM DEPARTMENT", cs);
+            try
+            {
+                cs.Open();
+                dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    retList.Add(dr["Department"].ToString());
+                }
+                cs.Close();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return retList;
+        }
+
+        //set Employment Types into dropdown menu from the Database
+        public List<string> SetEmploymentTypes()
+        {
+            var retList = new List<string>();
+            SqlCommand command = new SqlCommand("SELECT EmploymentType FROM EmploymentType",cs);
+            try
+            {
+                cs.Open();
+                dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    retList.Add(dr["EmploymentType"].ToString());
+                }
+                cs.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return retList;
+        }
+
+        //return DepartmentID of currently selected Department
+        public int GetDeptID(string dept)
+        {
+            Int32 returnDeptID = -1;
+            SqlCommand command = new SqlCommand("Select DepartmentID FROM Department Where Department = @dept", cs);
+            command.Parameters.Add("@dept", SqlDbType.VarChar);
+            command.Parameters["@dept"].Value = dept;
+            try
+            {
+                cs.Open();
+                returnDeptID = (Int32)command.ExecuteScalar();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            cs.Close();
+            return returnDeptID;
+        }
+
+        //Add all positions open in the department selected by passing the DeptID
+        public List<string> SetPositions(int DeptID)
+        {
+            var retList = new List<string>();
+            SqlCommand command = new SqlCommand("SELECT Position FROM Position WHERE DepartmentID = @DeptID", cs);
+            command.Parameters.Add("@DeptID", SqlDbType.Int);
+            command.Parameters["@DeptID"].Value = DeptID;
+            try
+            {
+                cs.Open();
+                dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    retList.Add(dr["Position"].ToString());
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             return retList;
         }
 

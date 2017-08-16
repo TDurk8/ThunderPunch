@@ -49,5 +49,43 @@ namespace ThunderPunch
                 tb.Font = new Font(tb.Font, FontStyle.Italic);
             }
         }
+        
+        public string RemoveFormat(string number)
+        {
+            string returnNumber = "";
+            foreach (char num in number)
+            {
+                if (char.IsNumber(num)) returnNumber += num;
+            }
+            return returnNumber;
+        }
+
+        public string RemoveCurrencyFormat(string number)
+        {
+            string returnNumber = "";
+            foreach(char num in number)
+            {
+                if (num=='.' || char.IsNumber(num))
+                {
+                    returnNumber += num;
+                }
+            }
+            return returnNumber;
+        }
+
+        public string CurrencyFormat(string money, RadioButton hourly, RadioButton salary)
+        {
+            string formattedMoney = "";
+            decimal momoney = 0.00m;
+            if (decimal.TryParse(money, out momoney) && salary.Checked)
+            {
+                formattedMoney = String.Format("{0:C0}", momoney);
+            }
+            else if (decimal.TryParse(money, out momoney))
+            {
+                formattedMoney = momoney.ToString("C");
+            }
+            return formattedMoney;
+        }
     }
 }

@@ -31,6 +31,16 @@
             this.tbctrlUser = new System.Windows.Forms.TabControl();
             this.tabUserPersonalInfo = new System.Windows.Forms.TabPage();
             this.grpCompanyRole = new System.Windows.Forms.GroupBox();
+            this.radWage = new System.Windows.Forms.RadioButton();
+            this.radSalary = new System.Windows.Forms.RadioButton();
+            this.lblWageError = new System.Windows.Forms.Label();
+            this.txtWages = new System.Windows.Forms.TextBox();
+            this.cmbEmployment = new System.Windows.Forms.ComboBox();
+            this.lblEmployment = new System.Windows.Forms.Label();
+            this.cmbPosition = new System.Windows.Forms.ComboBox();
+            this.lblPosition = new System.Windows.Forms.Label();
+            this.cmbDept = new System.Windows.Forms.ComboBox();
+            this.lblDept = new System.Windows.Forms.Label();
             this.lblDateHiredError = new System.Windows.Forms.Label();
             this.txtYearHired = new System.Windows.Forms.TextBox();
             this.txtDayHired = new System.Windows.Forms.TextBox();
@@ -41,6 +51,8 @@
             this.btnCheck = new System.Windows.Forms.Button();
             this.lblLoginID = new System.Windows.Forms.Label();
             this.txtLogin = new System.Windows.Forms.TextBox();
+            this.lblWage = new System.Windows.Forms.Label();
+            this.chkSalary = new System.Windows.Forms.CheckBox();
             this.grpSocialMedia = new System.Windows.Forms.GroupBox();
             this.grpPersonalInfo = new System.Windows.Forms.GroupBox();
             this.lblPhoneError = new System.Windows.Forms.Label();
@@ -71,10 +83,6 @@
             this.lblZip = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.tbNew = new System.Windows.Forms.TabPage();
-            this.lblDept = new System.Windows.Forms.Label();
-            this.cmbDept = new System.Windows.Forms.ComboBox();
-            this.cmbPosition = new System.Windows.Forms.ComboBox();
-            this.lblPosition = new System.Windows.Forms.Label();
             this.tbctrlUser.SuspendLayout();
             this.tabUserPersonalInfo.SuspendLayout();
             this.grpCompanyRole.SuspendLayout();
@@ -118,6 +126,12 @@
             // 
             // grpCompanyRole
             // 
+            this.grpCompanyRole.Controls.Add(this.radWage);
+            this.grpCompanyRole.Controls.Add(this.radSalary);
+            this.grpCompanyRole.Controls.Add(this.lblWageError);
+            this.grpCompanyRole.Controls.Add(this.txtWages);
+            this.grpCompanyRole.Controls.Add(this.cmbEmployment);
+            this.grpCompanyRole.Controls.Add(this.lblEmployment);
             this.grpCompanyRole.Controls.Add(this.cmbPosition);
             this.grpCompanyRole.Controls.Add(this.lblPosition);
             this.grpCompanyRole.Controls.Add(this.cmbDept);
@@ -132,6 +146,8 @@
             this.grpCompanyRole.Controls.Add(this.btnCheck);
             this.grpCompanyRole.Controls.Add(this.lblLoginID);
             this.grpCompanyRole.Controls.Add(this.txtLogin);
+            this.grpCompanyRole.Controls.Add(this.lblWage);
+            this.grpCompanyRole.Controls.Add(this.chkSalary);
             this.grpCompanyRole.ForeColor = System.Drawing.Color.PaleGreen;
             this.grpCompanyRole.Location = new System.Drawing.Point(7, 280);
             this.grpCompanyRole.Name = "grpCompanyRole";
@@ -141,12 +157,175 @@
             this.grpCompanyRole.Text = "Company Role";
             this.grpCompanyRole.Enter += new System.EventHandler(this.grpCompanyRole_Enter);
             // 
+            // radWage
+            // 
+            this.radWage.AutoSize = true;
+            this.radWage.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radWage.ForeColor = System.Drawing.SystemColors.Window;
+            this.radWage.Location = new System.Drawing.Point(287, 184);
+            this.radWage.Name = "radWage";
+            this.radWage.Size = new System.Drawing.Size(65, 24);
+            this.radWage.TabIndex = 40;
+            this.radWage.TabStop = true;
+            this.radWage.Text = "Hourly";
+            this.radWage.UseVisualStyleBackColor = true;
+            this.radWage.CheckedChanged += new System.EventHandler(this.radWage_CheckedChanged);
+            // 
+            // radSalary
+            // 
+            this.radSalary.AutoSize = true;
+            this.radSalary.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radSalary.ForeColor = System.Drawing.SystemColors.Window;
+            this.radSalary.Location = new System.Drawing.Point(356, 184);
+            this.radSalary.Name = "radSalary";
+            this.radSalary.Size = new System.Drawing.Size(64, 24);
+            this.radSalary.TabIndex = 39;
+            this.radSalary.TabStop = true;
+            this.radSalary.Text = "Salary";
+            this.radSalary.UseVisualStyleBackColor = true;
+            // 
+            // lblWageError
+            // 
+            this.lblWageError.AutoSize = true;
+            this.lblWageError.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWageError.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblWageError.Location = new System.Drawing.Point(174, 224);
+            this.lblWageError.Name = "lblWageError";
+            this.lblWageError.Size = new System.Drawing.Size(77, 20);
+            this.lblWageError.TabIndex = 38;
+            this.lblWageError.Text = "Wage Error";
+            // 
+            // txtWages
+            // 
+            this.txtWages.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtWages.Location = new System.Drawing.Point(223, 183);
+            this.txtWages.MaxLength = 6;
+            this.txtWages.Name = "txtWages";
+            this.txtWages.Size = new System.Drawing.Size(60, 26);
+            this.txtWages.TabIndex = 36;
+            this.txtWages.Enter += new System.EventHandler(this.txtWages_Enter);
+            this.txtWages.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtWages_KeyPress);
+            this.txtWages.Leave += new System.EventHandler(this.txtWages_Leave);
+            // 
+            // cmbEmployment
+            // 
+            this.cmbEmployment.DropDownHeight = 200;
+            this.cmbEmployment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbEmployment.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbEmployment.FormattingEnabled = true;
+            this.cmbEmployment.IntegralHeight = false;
+            this.cmbEmployment.Items.AddRange(new object[] {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"});
+            this.cmbEmployment.Location = new System.Drawing.Point(92, 182);
+            this.cmbEmployment.MaxDropDownItems = 15;
+            this.cmbEmployment.Name = "cmbEmployment";
+            this.cmbEmployment.Size = new System.Drawing.Size(79, 28);
+            this.cmbEmployment.TabIndex = 34;
+            // 
+            // lblEmployment
+            // 
+            this.lblEmployment.AutoSize = true;
+            this.lblEmployment.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmployment.ForeColor = System.Drawing.Color.White;
+            this.lblEmployment.Location = new System.Drawing.Point(4, 186);
+            this.lblEmployment.Name = "lblEmployment";
+            this.lblEmployment.Size = new System.Drawing.Size(84, 20);
+            this.lblEmployment.TabIndex = 33;
+            this.lblEmployment.Text = "Employment";
+            // 
+            // cmbPosition
+            // 
+            this.cmbPosition.DropDownHeight = 200;
+            this.cmbPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPosition.Enabled = false;
+            this.cmbPosition.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbPosition.FormattingEnabled = true;
+            this.cmbPosition.IntegralHeight = false;
+            this.cmbPosition.Items.AddRange(new object[] {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"});
+            this.cmbPosition.Location = new System.Drawing.Point(93, 143);
+            this.cmbPosition.MaxDropDownItems = 15;
+            this.cmbPosition.Name = "cmbPosition";
+            this.cmbPosition.Size = new System.Drawing.Size(252, 28);
+            this.cmbPosition.TabIndex = 32;
+            // 
+            // lblPosition
+            // 
+            this.lblPosition.AutoSize = true;
+            this.lblPosition.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPosition.ForeColor = System.Drawing.Color.White;
+            this.lblPosition.Location = new System.Drawing.Point(31, 146);
+            this.lblPosition.Name = "lblPosition";
+            this.lblPosition.Size = new System.Drawing.Size(57, 20);
+            this.lblPosition.TabIndex = 31;
+            this.lblPosition.Text = "Position";
+            // 
+            // cmbDept
+            // 
+            this.cmbDept.DropDownHeight = 200;
+            this.cmbDept.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDept.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDept.FormattingEnabled = true;
+            this.cmbDept.IntegralHeight = false;
+            this.cmbDept.Items.AddRange(new object[] {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"});
+            this.cmbDept.Location = new System.Drawing.Point(93, 104);
+            this.cmbDept.MaxDropDownItems = 15;
+            this.cmbDept.Name = "cmbDept";
+            this.cmbDept.Size = new System.Drawing.Size(252, 28);
+            this.cmbDept.TabIndex = 30;
+            this.cmbDept.SelectionChangeCommitted += new System.EventHandler(this.cmbDept_SelectionChangeCommitted);
+            // 
+            // lblDept
+            // 
+            this.lblDept.AutoSize = true;
+            this.lblDept.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDept.ForeColor = System.Drawing.Color.White;
+            this.lblDept.Location = new System.Drawing.Point(11, 106);
+            this.lblDept.Name = "lblDept";
+            this.lblDept.Size = new System.Drawing.Size(77, 20);
+            this.lblDept.TabIndex = 29;
+            this.lblDept.Text = "Department";
+            // 
             // lblDateHiredError
             // 
             this.lblDateHiredError.AutoSize = true;
             this.lblDateHiredError.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDateHiredError.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblDateHiredError.Location = new System.Drawing.Point(349, 67);
+            this.lblDateHiredError.Location = new System.Drawing.Point(349, 69);
             this.lblDateHiredError.Name = "lblDateHiredError";
             this.lblDateHiredError.Size = new System.Drawing.Size(86, 20);
             this.lblDateHiredError.TabIndex = 28;
@@ -156,26 +335,28 @@
             // 
             this.txtYearHired.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtYearHired.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtYearHired.Location = new System.Drawing.Point(284, 65);
+            this.txtYearHired.Location = new System.Drawing.Point(284, 66);
             this.txtYearHired.MaxLength = 4;
             this.txtYearHired.Name = "txtYearHired";
             this.txtYearHired.Size = new System.Drawing.Size(61, 26);
             this.txtYearHired.TabIndex = 11;
             this.txtYearHired.Text = "  Year";
             this.txtYearHired.Enter += new System.EventHandler(this.txtYearHired_Enter);
+            this.txtYearHired.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYearHired_KeyPress);
             this.txtYearHired.Leave += new System.EventHandler(this.txtYearHired_Leave);
             // 
             // txtDayHired
             // 
             this.txtDayHired.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDayHired.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtDayHired.Location = new System.Drawing.Point(212, 65);
+            this.txtDayHired.Location = new System.Drawing.Point(212, 66);
             this.txtDayHired.MaxLength = 2;
             this.txtDayHired.Name = "txtDayHired";
             this.txtDayHired.Size = new System.Drawing.Size(45, 26);
             this.txtDayHired.TabIndex = 10;
             this.txtDayHired.Text = "  Day";
             this.txtDayHired.Enter += new System.EventHandler(this.txtDayHired_Enter);
+            this.txtDayHired.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDayHired_KeyPress);
             this.txtDayHired.Leave += new System.EventHandler(this.txtDayHired_Leave);
             // 
             // cmbDateHired
@@ -198,7 +379,7 @@
             "October",
             "November",
             "December"});
-            this.cmbDateHired.Location = new System.Drawing.Point(93, 64);
+            this.cmbDateHired.Location = new System.Drawing.Point(93, 65);
             this.cmbDateHired.MaxDropDownItems = 15;
             this.cmbDateHired.Name = "cmbDateHired";
             this.cmbDateHired.Size = new System.Drawing.Size(92, 28);
@@ -209,7 +390,7 @@
             this.lblDateHired.AutoSize = true;
             this.lblDateHired.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDateHired.ForeColor = System.Drawing.Color.White;
-            this.lblDateHired.Location = new System.Drawing.Point(24, 68);
+            this.lblDateHired.Location = new System.Drawing.Point(24, 69);
             this.lblDateHired.Name = "lblDateHired";
             this.lblDateHired.Size = new System.Drawing.Size(64, 20);
             this.lblDateHired.TabIndex = 12;
@@ -220,7 +401,7 @@
             this.lblLoginError.AutoSize = true;
             this.lblLoginError.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLoginError.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblLoginError.Location = new System.Drawing.Point(273, 31);
+            this.lblLoginError.Location = new System.Drawing.Point(263, 31);
             this.lblLoginError.Name = "lblLoginError";
             this.lblLoginError.Size = new System.Drawing.Size(70, 20);
             this.lblLoginError.TabIndex = 6;
@@ -230,9 +411,9 @@
             // 
             this.btnRandom.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRandom.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnRandom.Location = new System.Drawing.Point(206, 26);
+            this.btnRandom.Location = new System.Drawing.Point(200, 26);
             this.btnRandom.Name = "btnRandom";
-            this.btnRandom.Size = new System.Drawing.Size(61, 31);
+            this.btnRandom.Size = new System.Drawing.Size(57, 31);
             this.btnRandom.TabIndex = 5;
             this.btnRandom.Text = "Random";
             this.btnRandom.UseVisualStyleBackColor = true;
@@ -244,7 +425,7 @@
             this.btnCheck.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnCheck.Location = new System.Drawing.Point(139, 26);
             this.btnCheck.Name = "btnCheck";
-            this.btnCheck.Size = new System.Drawing.Size(61, 31);
+            this.btnCheck.Size = new System.Drawing.Size(57, 31);
             this.btnCheck.TabIndex = 4;
             this.btnCheck.Text = "Check";
             this.btnCheck.UseVisualStyleBackColor = true;
@@ -274,6 +455,29 @@
             this.txtLogin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtLogin.Enter += new System.EventHandler(this.txtLogin_Enter);
             this.txtLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLogin_KeyPress);
+            // 
+            // lblWage
+            // 
+            this.lblWage.AutoSize = true;
+            this.lblWage.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWage.ForeColor = System.Drawing.Color.White;
+            this.lblWage.Location = new System.Drawing.Point(175, 186);
+            this.lblWage.Name = "lblWage";
+            this.lblWage.Size = new System.Drawing.Size(44, 20);
+            this.lblWage.TabIndex = 35;
+            this.lblWage.Text = "Wage";
+            // 
+            // chkSalary
+            // 
+            this.chkSalary.AutoSize = true;
+            this.chkSalary.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkSalary.ForeColor = System.Drawing.Color.Ivory;
+            this.chkSalary.Location = new System.Drawing.Point(284, 250);
+            this.chkSalary.Name = "chkSalary";
+            this.chkSalary.Size = new System.Drawing.Size(65, 24);
+            this.chkSalary.TabIndex = 37;
+            this.chkSalary.Text = "Salary";
+            this.chkSalary.UseVisualStyleBackColor = true;
             // 
             // grpSocialMedia
             // 
@@ -653,80 +857,6 @@
             this.tbNew.TabIndex = 1;
             this.tbNew.Text = "New Employee";
             // 
-            // lblDept
-            // 
-            this.lblDept.AutoSize = true;
-            this.lblDept.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDept.ForeColor = System.Drawing.Color.White;
-            this.lblDept.Location = new System.Drawing.Point(11, 106);
-            this.lblDept.Name = "lblDept";
-            this.lblDept.Size = new System.Drawing.Size(77, 20);
-            this.lblDept.TabIndex = 29;
-            this.lblDept.Text = "Department";
-            // 
-            // cmbDept
-            // 
-            this.cmbDept.DropDownHeight = 200;
-            this.cmbDept.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDept.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbDept.FormattingEnabled = true;
-            this.cmbDept.IntegralHeight = false;
-            this.cmbDept.Items.AddRange(new object[] {
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December"});
-            this.cmbDept.Location = new System.Drawing.Point(93, 103);
-            this.cmbDept.MaxDropDownItems = 15;
-            this.cmbDept.Name = "cmbDept";
-            this.cmbDept.Size = new System.Drawing.Size(252, 28);
-            this.cmbDept.TabIndex = 30;
-            // 
-            // cmbPosition
-            // 
-            this.cmbPosition.DropDownHeight = 200;
-            this.cmbPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPosition.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbPosition.FormattingEnabled = true;
-            this.cmbPosition.IntegralHeight = false;
-            this.cmbPosition.Items.AddRange(new object[] {
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December"});
-            this.cmbPosition.Location = new System.Drawing.Point(93, 143);
-            this.cmbPosition.MaxDropDownItems = 15;
-            this.cmbPosition.Name = "cmbPosition";
-            this.cmbPosition.Size = new System.Drawing.Size(252, 28);
-            this.cmbPosition.TabIndex = 32;
-            // 
-            // lblPosition
-            // 
-            this.lblPosition.AutoSize = true;
-            this.lblPosition.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPosition.ForeColor = System.Drawing.Color.White;
-            this.lblPosition.Location = new System.Drawing.Point(31, 146);
-            this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(57, 20);
-            this.lblPosition.TabIndex = 31;
-            this.lblPosition.Text = "Position";
-            // 
             // ModifyUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -795,5 +925,13 @@
         private System.Windows.Forms.Label lblPosition;
         private System.Windows.Forms.ComboBox cmbDept;
         private System.Windows.Forms.Label lblDept;
+        private System.Windows.Forms.ComboBox cmbEmployment;
+        private System.Windows.Forms.Label lblEmployment;
+        private System.Windows.Forms.TextBox txtWages;
+        private System.Windows.Forms.Label lblWage;
+        private System.Windows.Forms.CheckBox chkSalary;
+        private System.Windows.Forms.Label lblWageError;
+        private System.Windows.Forms.RadioButton radWage;
+        private System.Windows.Forms.RadioButton radSalary;
     }
 }

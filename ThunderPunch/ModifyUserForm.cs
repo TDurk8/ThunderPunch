@@ -21,9 +21,7 @@ namespace ThunderPunch
         {
             InitializeComponent();
             tbctrlUser.DrawItem += new DrawItemEventHandler(tbctrlUser_DrawItem);
-            SetStateList();
             SetUserForm();
-            SetDepartment();
         }
 
         private void tbctrlUser_DrawItem(Object sender, DrawItemEventArgs e)
@@ -71,15 +69,47 @@ namespace ThunderPunch
 
         private void SetDepartment()
         {
+            //Clear existing data and rerun the query to select Departments
             cmbDept.Items.Clear();
-            
-            
+            SQL_Interact sql = new SQL_Interact();
+            foreach (String dept in sql.SetDepartments())
+            {
+                cmbDept.Items.Add(dept);
+            }
+        }
+
+        private void SetEmployment()
+        {
+            //clear existing data and set the employment types
+            cmbEmployment.Items.Clear();
+            SQL_Interact sql = new SQL_Interact();
+            foreach (String type in sql.SetEmploymentTypes())
+            {
+                cmbEmployment.Items.Add(type);
+            }
+        }
+
+        private void cmbDept_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            SQL_Interact sql = new SQL_Interact();
+            List<string> positions = new List<string>();
+            cmbPosition.Enabled = true;
+            cmbPosition.Items.Clear();
+            positions = sql.SetPositions(sql.GetDeptID(cmbDept.SelectedItem.ToString()));
+
+            foreach(string position in positions)
+            {
+                cmbPosition.Items.Add(position);
+            }
         }
 
         private void SetUserForm()
         {
             //properly setup form for new user
             SetStateList();
+            SetEmployment();
+            SetDepartment();
+            cmbDept.Sorted=true;
             txtFName.Text="First";
             txtLName.Text = "Last";
             txtEmail.Clear();
@@ -112,12 +142,20 @@ namespace ThunderPunch
             txtYearDOB.Font = new Font(txtYearDOB.Font, FontStyle.Italic);
             txtDayHired.Font = new Font(txtYearDOB.Font, FontStyle.Italic);
             txtYearHired.Font = new Font(txtYearDOB.Font, FontStyle.Italic);
+            txtYearHired.ForeColor = System.Drawing.Color.DarkGray;
+            txtDayHired.ForeColor = System.Drawing.Color.DarkGray;
             lblLoginError.Text = "";
             txtLogin.Clear();
             lblDateHiredError.Text = "";
             txtYearHired.Text="Year";
             txtDayHired.Text="Day";
             cmbDateHired.SelectedIndex = -1;
+            cmbPosition.Items.Clear();
+            cmbDept.SelectedIndex = -1;
+            cmbPosition.Enabled = false;
+            chkSalary.Checked = false;
+            txtWages.Clear();
+            lblWageError.Text = "";
 
         }
         public enum State
@@ -403,36 +441,36 @@ namespace ThunderPunch
 
         private void txtPhone_Enter(object sender, EventArgs e)
         {
-            //if phone number is in text box already, remove formatting
-            string phone = txtPhone.Text;
-            textFormater.TextBoxEnter(txtPhone,"");
-            if (phone.Count() == 13 && phone.Substring(0, 1) == "(" && phone.Substring(4, 1) == ")" && phone.Substring(8, 1) == "-")
-            {
-                txtPhone.Clear();
-                foreach (char c in phone)
-                {
-                    if (char.IsDigit(c)) txtPhone.Text += c.ToString();
-                }
-            }
+            ////if phone number is in text box already, remove formatting
+            txtPhone.Text = textFormater.RemoveFormat(txtPhone.Text);
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
             // verify first that login is 4 digits
             // check to see if Attempted Login Id Exists in DB already
+            
+            lblLoginError.ForeColor = System.Drawing.Color.DarkRed;
             if (validator.FourDigits(txtLogin.Text))
             {
                 SQL_Interact sql = new SQL_Interact();
-                if (sql.ValidLogin(txtLogin.Text) != null) lblLoginError.Text = "Login Taken";
+                if (sql.ValidLogin(txtLogin.Text) != null)
+                {
+                    lblLoginError.Text = "Login Taken";
+                    txtLogin.Focus();
+                }
                 else
                 {
+                    lblLoginError.ForeColor = System.Drawing.Color.PaleGreen;
                     lblLoginError.Text = "Login Available!";
                 }
             }
             else
             {
                 lblLoginError.Text = "Must be 4 Digits";
+                txtLogin.Focus();
             }
+            txtLogin.SelectAll();
         }
         private void btnRandom_Click(object sender, EventArgs e)
         {
@@ -545,6 +583,48 @@ namespace ThunderPunch
         private void txtZipcode_Enter(object sender, EventArgs e)
         {
             textFormater.TextBoxEnter(txtZipcode, "");
+        }
+
+        private void txtDayHired_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = validator.DigitOnly(e);
+        }
+
+        private void txtYearHired_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = validator.DigitOnly(e);
+        }
+
+        private void txtWages_Leave(object sender, EventArgs e)
+        {
+            //if (!validator.WageSalaryCheck(txtWages.Text, radSalary,radWage, lblWageError))
+            //{
+            //    txtWages.Focus();
+            //}
+            txtWages.Text = textFormater.CurrencyFormat(txtWages.Text,radWage,radSalary);
+        }
+
+        private void txtWages_KeyPress(object sender, KeyPressEventArgs e)
+       {
+            e.Handled = validator.CurrencyDigitsOnly(e);
+        }
+
+        private void txtWages_Enter(object sender, EventArgs e)
+        {
+            txtWages.Text = textFormater.RemoveCurrencyFormat(txtWages.Text);
+        }
+
+        private void radWage_CheckedChanged(object sender, EventArgs e)
+        {
+            txtWages.Text=textFormater.RemoveCurrencyFormat(txtWages.Text);
+            if (txtWages.Text != "" && !validator.WageSalaryCheck(txtWages.Text, radSalary, radWage, lblWageError))
+            {
+                txtWages.Focus();
+            }
+            else
+            {
+                txtWages.Text = textFormater.CurrencyFormat(txtWages.Text, radWage, radSalary);
+            }
         }
     }        
 }

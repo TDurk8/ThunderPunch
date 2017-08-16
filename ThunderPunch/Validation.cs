@@ -113,5 +113,43 @@ namespace ThunderPunch
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back) return true;
             else return false;
         }
+
+        public bool CurrencyDigitsOnly(KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != 46) return true;
+            else return false;
+            //if (e.KeyChar == 46) MessageBox.Show(".");
+            //return false;
+        }
+
+        public bool WageSalaryCheck(string wage, RadioButton salary,RadioButton hourly, Label error)
+        {
+            const int SALARYMINIMUM = 20000;
+            const int SALARYMAXIMUM = 999999;
+            const decimal HOURLYMINIMUM = 7.25m;
+            const decimal HOURLYMAXIMUM = 200.00M;
+
+            
+            error.Text = "";
+            if (decimal.TryParse(wage, out decimal convertedWage))
+            {
+                if ((convertedWage < SALARYMINIMUM || convertedWage > SALARYMAXIMUM) && salary.Checked)
+                {
+                    error.Text = "Salary Must be between $" + SALARYMINIMUM + " and $" + SALARYMAXIMUM;
+                    return false;
+                }
+                else if ((convertedWage < HOURLYMINIMUM || convertedWage > HOURLYMAXIMUM) && hourly.Checked)
+                {
+                    error.Text = "Hourly Must be between $" + HOURLYMINIMUM + " and $" + HOURLYMAXIMUM;
+                    return false;
+                }
+            }
+            else if(salary.Checked || hourly.Checked)
+            {
+                error.Text = "Invalid wage Amount";
+                return false;
+            }
+            return true;
+        }
     }
 }
