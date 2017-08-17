@@ -31,8 +31,8 @@
             this.tbctrlUser = new System.Windows.Forms.TabControl();
             this.tabUserPersonalInfo = new System.Windows.Forms.TabPage();
             this.grpCompanyRole = new System.Windows.Forms.GroupBox();
-            this.radWage = new System.Windows.Forms.RadioButton();
-            this.radSalary = new System.Windows.Forms.RadioButton();
+            this.lblWageType = new System.Windows.Forms.Label();
+            this.cmbWages = new System.Windows.Forms.ComboBox();
             this.lblWageError = new System.Windows.Forms.Label();
             this.txtWages = new System.Windows.Forms.TextBox();
             this.cmbEmployment = new System.Windows.Forms.ComboBox();
@@ -51,8 +51,6 @@
             this.btnCheck = new System.Windows.Forms.Button();
             this.lblLoginID = new System.Windows.Forms.Label();
             this.txtLogin = new System.Windows.Forms.TextBox();
-            this.lblWage = new System.Windows.Forms.Label();
-            this.chkSalary = new System.Windows.Forms.CheckBox();
             this.grpSocialMedia = new System.Windows.Forms.GroupBox();
             this.grpPersonalInfo = new System.Windows.Forms.GroupBox();
             this.lblPhoneError = new System.Windows.Forms.Label();
@@ -107,7 +105,7 @@
             this.tbctrlUser.SelectedIndex = 0;
             this.tbctrlUser.Size = new System.Drawing.Size(876, 609);
             this.tbctrlUser.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tbctrlUser.TabIndex = 0;
+            this.tbctrlUser.TabIndex = 999;
             // 
             // tabUserPersonalInfo
             // 
@@ -126,8 +124,8 @@
             // 
             // grpCompanyRole
             // 
-            this.grpCompanyRole.Controls.Add(this.radWage);
-            this.grpCompanyRole.Controls.Add(this.radSalary);
+            this.grpCompanyRole.Controls.Add(this.lblWageType);
+            this.grpCompanyRole.Controls.Add(this.cmbWages);
             this.grpCompanyRole.Controls.Add(this.lblWageError);
             this.grpCompanyRole.Controls.Add(this.txtWages);
             this.grpCompanyRole.Controls.Add(this.cmbEmployment);
@@ -146,50 +144,49 @@
             this.grpCompanyRole.Controls.Add(this.btnCheck);
             this.grpCompanyRole.Controls.Add(this.lblLoginID);
             this.grpCompanyRole.Controls.Add(this.txtLogin);
-            this.grpCompanyRole.Controls.Add(this.lblWage);
-            this.grpCompanyRole.Controls.Add(this.chkSalary);
             this.grpCompanyRole.ForeColor = System.Drawing.Color.PaleGreen;
             this.grpCompanyRole.Location = new System.Drawing.Point(7, 280);
             this.grpCompanyRole.Name = "grpCompanyRole";
             this.grpCompanyRole.Size = new System.Drawing.Size(443, 280);
-            this.grpCompanyRole.TabIndex = 31;
+            this.grpCompanyRole.TabIndex = 2;
             this.grpCompanyRole.TabStop = false;
             this.grpCompanyRole.Text = "Company Role";
             this.grpCompanyRole.Enter += new System.EventHandler(this.grpCompanyRole_Enter);
             // 
-            // radWage
+            // lblWageType
             // 
-            this.radWage.AutoSize = true;
-            this.radWage.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radWage.ForeColor = System.Drawing.SystemColors.Window;
-            this.radWage.Location = new System.Drawing.Point(287, 184);
-            this.radWage.Name = "radWage";
-            this.radWage.Size = new System.Drawing.Size(65, 24);
-            this.radWage.TabIndex = 40;
-            this.radWage.TabStop = true;
-            this.radWage.Text = "Hourly";
-            this.radWage.UseVisualStyleBackColor = true;
-            this.radWage.CheckedChanged += new System.EventHandler(this.radWage_CheckedChanged);
+            this.lblWageType.AutoSize = true;
+            this.lblWageType.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWageType.ForeColor = System.Drawing.Color.White;
+            this.lblWageType.Location = new System.Drawing.Point(351, 186);
+            this.lblWageType.Name = "lblWageType";
+            this.lblWageType.Size = new System.Drawing.Size(43, 20);
+            this.lblWageType.TabIndex = 42;
+            this.lblWageType.Text = "/ hour";
             // 
-            // radSalary
+            // cmbWages
             // 
-            this.radSalary.AutoSize = true;
-            this.radSalary.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radSalary.ForeColor = System.Drawing.SystemColors.Window;
-            this.radSalary.Location = new System.Drawing.Point(356, 184);
-            this.radSalary.Name = "radSalary";
-            this.radSalary.Size = new System.Drawing.Size(64, 24);
-            this.radSalary.TabIndex = 39;
-            this.radSalary.TabStop = true;
-            this.radSalary.Text = "Salary";
-            this.radSalary.UseVisualStyleBackColor = true;
+            this.cmbWages.DropDownHeight = 200;
+            this.cmbWages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbWages.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbWages.FormattingEnabled = true;
+            this.cmbWages.IntegralHeight = false;
+            this.cmbWages.Items.AddRange(new object[] {
+            "Hourly",
+            "Salary"});
+            this.cmbWages.Location = new System.Drawing.Point(177, 182);
+            this.cmbWages.MaxDropDownItems = 15;
+            this.cmbWages.Name = "cmbWages";
+            this.cmbWages.Size = new System.Drawing.Size(80, 28);
+            this.cmbWages.TabIndex = 9;
+            this.cmbWages.TextChanged += new System.EventHandler(this.cmbWages_TextChanged);
             // 
             // lblWageError
             // 
             this.lblWageError.AutoSize = true;
             this.lblWageError.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWageError.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblWageError.Location = new System.Drawing.Point(174, 224);
+            this.lblWageError.Location = new System.Drawing.Point(88, 213);
             this.lblWageError.Name = "lblWageError";
             this.lblWageError.Size = new System.Drawing.Size(77, 20);
             this.lblWageError.TabIndex = 38;
@@ -198,11 +195,11 @@
             // txtWages
             // 
             this.txtWages.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtWages.Location = new System.Drawing.Point(223, 183);
+            this.txtWages.Location = new System.Drawing.Point(263, 183);
             this.txtWages.MaxLength = 6;
             this.txtWages.Name = "txtWages";
-            this.txtWages.Size = new System.Drawing.Size(60, 26);
-            this.txtWages.TabIndex = 36;
+            this.txtWages.Size = new System.Drawing.Size(82, 26);
+            this.txtWages.TabIndex = 10;
             this.txtWages.Enter += new System.EventHandler(this.txtWages_Enter);
             this.txtWages.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtWages_KeyPress);
             this.txtWages.Leave += new System.EventHandler(this.txtWages_Leave);
@@ -214,24 +211,11 @@
             this.cmbEmployment.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEmployment.FormattingEnabled = true;
             this.cmbEmployment.IntegralHeight = false;
-            this.cmbEmployment.Items.AddRange(new object[] {
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December"});
             this.cmbEmployment.Location = new System.Drawing.Point(92, 182);
             this.cmbEmployment.MaxDropDownItems = 15;
             this.cmbEmployment.Name = "cmbEmployment";
             this.cmbEmployment.Size = new System.Drawing.Size(79, 28);
-            this.cmbEmployment.TabIndex = 34;
+            this.cmbEmployment.TabIndex = 8;
             // 
             // lblEmployment
             // 
@@ -269,7 +253,7 @@
             this.cmbPosition.MaxDropDownItems = 15;
             this.cmbPosition.Name = "cmbPosition";
             this.cmbPosition.Size = new System.Drawing.Size(252, 28);
-            this.cmbPosition.TabIndex = 32;
+            this.cmbPosition.TabIndex = 7;
             // 
             // lblPosition
             // 
@@ -306,7 +290,7 @@
             this.cmbDept.MaxDropDownItems = 15;
             this.cmbDept.Name = "cmbDept";
             this.cmbDept.Size = new System.Drawing.Size(252, 28);
-            this.cmbDept.TabIndex = 30;
+            this.cmbDept.TabIndex = 6;
             this.cmbDept.SelectionChangeCommitted += new System.EventHandler(this.cmbDept_SelectionChangeCommitted);
             // 
             // lblDept
@@ -339,7 +323,7 @@
             this.txtYearHired.MaxLength = 4;
             this.txtYearHired.Name = "txtYearHired";
             this.txtYearHired.Size = new System.Drawing.Size(61, 26);
-            this.txtYearHired.TabIndex = 11;
+            this.txtYearHired.TabIndex = 5;
             this.txtYearHired.Text = "  Year";
             this.txtYearHired.Enter += new System.EventHandler(this.txtYearHired_Enter);
             this.txtYearHired.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYearHired_KeyPress);
@@ -353,7 +337,7 @@
             this.txtDayHired.MaxLength = 2;
             this.txtDayHired.Name = "txtDayHired";
             this.txtDayHired.Size = new System.Drawing.Size(45, 26);
-            this.txtDayHired.TabIndex = 10;
+            this.txtDayHired.TabIndex = 4;
             this.txtDayHired.Text = "  Day";
             this.txtDayHired.Enter += new System.EventHandler(this.txtDayHired_Enter);
             this.txtDayHired.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDayHired_KeyPress);
@@ -383,7 +367,7 @@
             this.cmbDateHired.MaxDropDownItems = 15;
             this.cmbDateHired.Name = "cmbDateHired";
             this.cmbDateHired.Size = new System.Drawing.Size(92, 28);
-            this.cmbDateHired.TabIndex = 9;
+            this.cmbDateHired.TabIndex = 3;
             // 
             // lblDateHired
             // 
@@ -414,7 +398,7 @@
             this.btnRandom.Location = new System.Drawing.Point(200, 26);
             this.btnRandom.Name = "btnRandom";
             this.btnRandom.Size = new System.Drawing.Size(57, 31);
-            this.btnRandom.TabIndex = 5;
+            this.btnRandom.TabIndex = 2;
             this.btnRandom.Text = "Random";
             this.btnRandom.UseVisualStyleBackColor = true;
             this.btnRandom.Click += new System.EventHandler(this.btnRandom_Click);
@@ -426,7 +410,7 @@
             this.btnCheck.Location = new System.Drawing.Point(139, 26);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(57, 31);
-            this.btnCheck.TabIndex = 4;
+            this.btnCheck.TabIndex = 1;
             this.btnCheck.Text = "Check";
             this.btnCheck.UseVisualStyleBackColor = true;
             this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
@@ -450,34 +434,11 @@
             this.txtLogin.MaxLength = 4;
             this.txtLogin.Name = "txtLogin";
             this.txtLogin.Size = new System.Drawing.Size(40, 26);
-            this.txtLogin.TabIndex = 3;
+            this.txtLogin.TabIndex = 0;
             this.txtLogin.Text = "8888";
             this.txtLogin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtLogin.Enter += new System.EventHandler(this.txtLogin_Enter);
             this.txtLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLogin_KeyPress);
-            // 
-            // lblWage
-            // 
-            this.lblWage.AutoSize = true;
-            this.lblWage.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWage.ForeColor = System.Drawing.Color.White;
-            this.lblWage.Location = new System.Drawing.Point(175, 186);
-            this.lblWage.Name = "lblWage";
-            this.lblWage.Size = new System.Drawing.Size(44, 20);
-            this.lblWage.TabIndex = 35;
-            this.lblWage.Text = "Wage";
-            // 
-            // chkSalary
-            // 
-            this.chkSalary.AutoSize = true;
-            this.chkSalary.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSalary.ForeColor = System.Drawing.Color.Ivory;
-            this.chkSalary.Location = new System.Drawing.Point(284, 250);
-            this.chkSalary.Name = "chkSalary";
-            this.chkSalary.Size = new System.Drawing.Size(65, 24);
-            this.chkSalary.TabIndex = 37;
-            this.chkSalary.Text = "Salary";
-            this.chkSalary.UseVisualStyleBackColor = true;
             // 
             // grpSocialMedia
             // 
@@ -521,7 +482,7 @@
             this.grpPersonalInfo.Location = new System.Drawing.Point(7, 3);
             this.grpPersonalInfo.Name = "grpPersonalInfo";
             this.grpPersonalInfo.Size = new System.Drawing.Size(443, 271);
-            this.grpPersonalInfo.TabIndex = 30;
+            this.grpPersonalInfo.TabIndex = 0;
             this.grpPersonalInfo.TabStop = false;
             this.grpPersonalInfo.Text = "Personal Info";
             this.grpPersonalInfo.Enter += new System.EventHandler(this.grpPersonalInfo_Enter);
@@ -796,7 +757,7 @@
             this.txtFName.MaxLength = 20;
             this.txtFName.Name = "txtFName";
             this.txtFName.Size = new System.Drawing.Size(107, 26);
-            this.txtFName.TabIndex = 1;
+            this.txtFName.TabIndex = 0;
             this.txtFName.Text = "  First";
             this.txtFName.Enter += new System.EventHandler(this.txtFName_Enter);
             this.txtFName.Leave += new System.EventHandler(this.txtFName_Leave);
@@ -928,10 +889,8 @@
         private System.Windows.Forms.ComboBox cmbEmployment;
         private System.Windows.Forms.Label lblEmployment;
         private System.Windows.Forms.TextBox txtWages;
-        private System.Windows.Forms.Label lblWage;
-        private System.Windows.Forms.CheckBox chkSalary;
         private System.Windows.Forms.Label lblWageError;
-        private System.Windows.Forms.RadioButton radWage;
-        private System.Windows.Forms.RadioButton radSalary;
+        private System.Windows.Forms.Label lblWageType;
+        private System.Windows.Forms.ComboBox cmbWages;
     }
 }

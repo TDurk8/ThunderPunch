@@ -153,10 +153,11 @@ namespace ThunderPunch
             cmbPosition.Items.Clear();
             cmbDept.SelectedIndex = -1;
             cmbPosition.Enabled = false;
-            chkSalary.Checked = false;
             txtWages.Clear();
             lblWageError.Text = "";
-
+            txtWages.Text = "";
+            cmbWages.SelectedIndex = 0;
+            lblWageType.Text = "/ hour";
         }
         public enum State
         {
@@ -443,6 +444,7 @@ namespace ThunderPunch
         {
             ////if phone number is in text box already, remove formatting
             txtPhone.Text = textFormater.RemoveFormat(txtPhone.Text);
+            textFormater.TextBoxEnter(txtPhone, "");
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
@@ -597,11 +599,11 @@ namespace ThunderPunch
 
         private void txtWages_Leave(object sender, EventArgs e)
         {
-            //if (!validator.WageSalaryCheck(txtWages.Text, radSalary,radWage, lblWageError))
-            //{
-            //    txtWages.Focus();
-            //}
-            txtWages.Text = textFormater.CurrencyFormat(txtWages.Text,radWage,radSalary);
+            if (!validator.WageSalaryCheck(txtWages.Text, cmbWages, lblWageError))
+            {
+                txtWages.SelectAll();
+            }
+            txtWages.Text = textFormater.CurrencyFormat(txtWages.Text, cmbWages);
         }
 
         private void txtWages_KeyPress(object sender, KeyPressEventArgs e)
@@ -614,17 +616,23 @@ namespace ThunderPunch
             txtWages.Text = textFormater.RemoveCurrencyFormat(txtWages.Text);
         }
 
-        private void radWage_CheckedChanged(object sender, EventArgs e)
+        //private void cmbWages_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    MessageBox.Show("SelectedIndexChanged");
+            
+        //}
+
+        //private void cmbWages_SelectionChangeCommitted(object sender, EventArgs e)
+        //{
+        //    MessageBox.Show("Selection Change Committed");
+
+        //}
+
+        private void cmbWages_TextChanged(object sender, EventArgs e)
         {
-            txtWages.Text=textFormater.RemoveCurrencyFormat(txtWages.Text);
-            if (txtWages.Text != "" && !validator.WageSalaryCheck(txtWages.Text, radSalary, radWage, lblWageError))
-            {
-                txtWages.Focus();
-            }
-            else
-            {
-                txtWages.Text = textFormater.CurrencyFormat(txtWages.Text, radWage, radSalary);
-            }
+            txtWages.Clear();
+            if (cmbWages.Text == "Hourly") lblWageType.Text = "/ hour";
+            else lblWageType.Text = "/ year";
         }
     }        
 }

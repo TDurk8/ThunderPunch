@@ -73,11 +73,11 @@ namespace ThunderPunch
             return returnNumber;
         }
 
-        public string CurrencyFormat(string money, RadioButton hourly, RadioButton salary)
+        public string CurrencyFormat(string money, ComboBox wageType)
         {
             string formattedMoney = "";
             decimal momoney = 0.00m;
-            if (decimal.TryParse(money, out momoney) && salary.Checked)
+            if (decimal.TryParse(money, out momoney) && wageType.Text=="Salary")
             {
                 formattedMoney = String.Format("{0:C0}", momoney);
             }

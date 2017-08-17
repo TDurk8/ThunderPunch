@@ -122,7 +122,7 @@ namespace ThunderPunch
             //return false;
         }
 
-        public bool WageSalaryCheck(string wage, RadioButton salary,RadioButton hourly, Label error)
+        public bool WageSalaryCheck(string wage, ComboBox wagetype, Label error)
         {
             const int SALARYMINIMUM = 20000;
             const int SALARYMAXIMUM = 999999;
@@ -133,21 +133,16 @@ namespace ThunderPunch
             error.Text = "";
             if (decimal.TryParse(wage, out decimal convertedWage))
             {
-                if ((convertedWage < SALARYMINIMUM || convertedWage > SALARYMAXIMUM) && salary.Checked)
+                if ((convertedWage < SALARYMINIMUM || convertedWage > SALARYMAXIMUM) && wagetype.Text=="Salary")
                 {
                     error.Text = "Salary Must be between $" + SALARYMINIMUM + " and $" + SALARYMAXIMUM;
                     return false;
                 }
-                else if ((convertedWage < HOURLYMINIMUM || convertedWage > HOURLYMAXIMUM) && hourly.Checked)
+                else if ((convertedWage < HOURLYMINIMUM || convertedWage > HOURLYMAXIMUM) && wagetype.Text=="Hourly")
                 {
                     error.Text = "Hourly Must be between $" + HOURLYMINIMUM + " and $" + HOURLYMAXIMUM;
                     return false;
                 }
-            }
-            else if(salary.Checked || hourly.Checked)
-            {
-                error.Text = "Invalid wage Amount";
-                return false;
             }
             return true;
         }
