@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btn1 = new System.Windows.Forms.Button();
             this.btn2 = new System.Windows.Forms.Button();
             this.btn3 = new System.Windows.Forms.Button();
@@ -40,11 +41,25 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.btn0 = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grpKeyPad = new System.Windows.Forms.GroupBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.lblMaskLogin = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.grpEmployeeInfo = new System.Windows.Forms.GroupBox();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.lblLName = new System.Windows.Forms.Label();
+            this.lblFName = new System.Windows.Forms.Label();
+            this.pbProfilePic = new System.Windows.Forms.PictureBox();
+            this.lblNetworkStatus = new System.Windows.Forms.Label();
+            this.pbNetworkStatus = new System.Windows.Forms.PictureBox();
+            this.btnshow = new System.Windows.Forms.Button();
+            this.lblCurrentTime = new System.Windows.Forms.Label();
+            this.timerTime = new System.Windows.Forms.Timer(this.components);
+            this.tmrTimeout = new System.Windows.Forms.Timer(this.components);
+            this.grpKeyPad.SuspendLayout();
+            this.grpEmployeeInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbProfilePic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNetworkStatus)).BeginInit();
             this.SuspendLayout();
             // 
             // btn1
@@ -203,33 +218,33 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // groupBox1
+            // grpKeyPad
             // 
-            this.groupBox1.Controls.Add(this.btn1);
-            this.groupBox1.Controls.Add(this.btnOK);
-            this.groupBox1.Controls.Add(this.btn2);
-            this.groupBox1.Controls.Add(this.btn0);
-            this.groupBox1.Controls.Add(this.btn3);
-            this.groupBox1.Controls.Add(this.btnClear);
-            this.groupBox1.Controls.Add(this.btn4);
-            this.groupBox1.Controls.Add(this.btn9);
-            this.groupBox1.Controls.Add(this.btn5);
-            this.groupBox1.Controls.Add(this.btn8);
-            this.groupBox1.Controls.Add(this.btn6);
-            this.groupBox1.Controls.Add(this.btn7);
-            this.groupBox1.Location = new System.Drawing.Point(45, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(319, 440);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.grpKeyPad.Controls.Add(this.btn1);
+            this.grpKeyPad.Controls.Add(this.btnOK);
+            this.grpKeyPad.Controls.Add(this.btn2);
+            this.grpKeyPad.Controls.Add(this.btn0);
+            this.grpKeyPad.Controls.Add(this.btn3);
+            this.grpKeyPad.Controls.Add(this.btnClear);
+            this.grpKeyPad.Controls.Add(this.btn4);
+            this.grpKeyPad.Controls.Add(this.btn9);
+            this.grpKeyPad.Controls.Add(this.btn5);
+            this.grpKeyPad.Controls.Add(this.btn8);
+            this.grpKeyPad.Controls.Add(this.btn6);
+            this.grpKeyPad.Controls.Add(this.btn7);
+            this.grpKeyPad.Location = new System.Drawing.Point(45, 81);
+            this.grpKeyPad.Name = "grpKeyPad";
+            this.grpKeyPad.Size = new System.Drawing.Size(319, 440);
+            this.grpKeyPad.TabIndex = 12;
+            this.grpKeyPad.TabStop = false;
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(508, 538);
+            this.btnExit.Location = new System.Drawing.Point(686, 657);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 13;
+            this.btnExit.TabStop = false;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -238,7 +253,7 @@
             // 
             this.lblMaskLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMaskLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaskLogin.Location = new System.Drawing.Point(48, 455);
+            this.lblMaskLogin.Location = new System.Drawing.Point(48, 524);
             this.lblMaskLogin.Name = "lblMaskLogin";
             this.lblMaskLogin.Size = new System.Drawing.Size(316, 57);
             this.lblMaskLogin.TabIndex = 14;
@@ -247,28 +262,139 @@
             // lblStatus
             // 
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(48, 512);
+            this.lblStatus.Location = new System.Drawing.Point(48, 581);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(316, 40);
             this.lblStatus.TabIndex = 15;
+            this.lblStatus.Text = "Status";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // grpEmployeeInfo
+            // 
+            this.grpEmployeeInfo.Controls.Add(this.lblTitle);
+            this.grpEmployeeInfo.Controls.Add(this.lblLName);
+            this.grpEmployeeInfo.Controls.Add(this.lblFName);
+            this.grpEmployeeInfo.Controls.Add(this.pbProfilePic);
+            this.grpEmployeeInfo.Location = new System.Drawing.Point(370, 81);
+            this.grpEmployeeInfo.Name = "grpEmployeeInfo";
+            this.grpEmployeeInfo.Size = new System.Drawing.Size(391, 428);
+            this.grpEmployeeInfo.TabIndex = 16;
+            this.grpEmployeeInfo.TabStop = false;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(142, 125);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(243, 34);
+            this.lblTitle.TabIndex = 3;
+            this.lblTitle.Text = "Title";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblLName
+            // 
+            this.lblLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLName.Location = new System.Drawing.Point(142, 86);
+            this.lblLName.Name = "lblLName";
+            this.lblLName.Size = new System.Drawing.Size(243, 34);
+            this.lblLName.TabIndex = 2;
+            this.lblLName.Text = "LastName";
+            this.lblLName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblFName
+            // 
+            this.lblFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFName.Location = new System.Drawing.Point(143, 52);
+            this.lblFName.Name = "lblFName";
+            this.lblFName.Size = new System.Drawing.Size(243, 34);
+            this.lblFName.TabIndex = 1;
+            this.lblFName.Text = "First Name";
+            this.lblFName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pbProfilePic
+            // 
+            this.pbProfilePic.Location = new System.Drawing.Point(11, 34);
+            this.pbProfilePic.Name = "pbProfilePic";
+            this.pbProfilePic.Size = new System.Drawing.Size(125, 125);
+            this.pbProfilePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbProfilePic.TabIndex = 0;
+            this.pbProfilePic.TabStop = false;
+            // 
+            // lblNetworkStatus
+            // 
+            this.lblNetworkStatus.AutoSize = true;
+            this.lblNetworkStatus.Location = new System.Drawing.Point(23, 659);
+            this.lblNetworkStatus.Name = "lblNetworkStatus";
+            this.lblNetworkStatus.Size = new System.Drawing.Size(154, 13);
+            this.lblNetworkStatus.TabIndex = 18;
+            this.lblNetworkStatus.Text = "Unable to connect to database";
+            // 
+            // pbNetworkStatus
+            // 
+            this.pbNetworkStatus.Image = global::ThunderPunch.Properties.Resources.redcircle;
+            this.pbNetworkStatus.Location = new System.Drawing.Point(7, 660);
+            this.pbNetworkStatus.Name = "pbNetworkStatus";
+            this.pbNetworkStatus.Size = new System.Drawing.Size(10, 10);
+            this.pbNetworkStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbNetworkStatus.TabIndex = 17;
+            this.pbNetworkStatus.TabStop = false;
+            // 
+            // btnshow
+            // 
+            this.btnshow.Location = new System.Drawing.Point(605, 657);
+            this.btnshow.Name = "btnshow";
+            this.btnshow.Size = new System.Drawing.Size(75, 23);
+            this.btnshow.TabIndex = 19;
+            this.btnshow.TabStop = false;
+            this.btnshow.Text = "showUserEdit";
+            this.btnshow.UseVisualStyleBackColor = true;
+            this.btnshow.Click += new System.EventHandler(this.btnshow_Click);
+            // 
+            // lblCurrentTime
+            // 
+            this.lblCurrentTime.Font = new System.Drawing.Font("MS Reference Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentTime.Location = new System.Drawing.Point(45, 29);
+            this.lblCurrentTime.Name = "lblCurrentTime";
+            this.lblCurrentTime.Size = new System.Drawing.Size(716, 49);
+            this.lblCurrentTime.TabIndex = 20;
+            this.lblCurrentTime.Text = "Current Date and Time";
+            this.lblCurrentTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // timerTime
+            // 
+            this.timerTime.Tick += new System.EventHandler(this.timerTime_Tick);
+            // 
+            // tmrTimeout
+            // 
+            this.tmrTimeout.Interval = 10000;
+            this.tmrTimeout.Tick += new System.EventHandler(this.tmrTimeout_Tick);
             // 
             // frmLogin
             // 
+            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 561);
+            this.ClientSize = new System.Drawing.Size(773, 681);
+            this.Controls.Add(this.lblCurrentTime);
+            this.Controls.Add(this.btnshow);
+            this.Controls.Add(this.lblNetworkStatus);
+            this.Controls.Add(this.pbNetworkStatus);
+            this.Controls.Add(this.grpEmployeeInfo);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblMaskLogin);
             this.Controls.Add(this.btnExit);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grpKeyPad);
             this.KeyPreview = true;
             this.Name = "frmLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ThunderPunch Login System";
-            this.Load += new System.EventHandler(this.LoginForm_Load);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmLogin_KeyPress);
-            this.groupBox1.ResumeLayout(false);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmLogin_KeyDown);
+            this.grpKeyPad.ResumeLayout(false);
+            this.grpEmployeeInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbProfilePic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNetworkStatus)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -286,10 +412,21 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btn0;
         private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grpKeyPad;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblMaskLogin;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.GroupBox grpEmployeeInfo;
+        private System.Windows.Forms.Label lblFName;
+        private System.Windows.Forms.PictureBox pbProfilePic;
+        private System.Windows.Forms.Label lblLName;
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.PictureBox pbNetworkStatus;
+        private System.Windows.Forms.Label lblNetworkStatus;
+        private System.Windows.Forms.Button btnshow;
+        private System.Windows.Forms.Label lblCurrentTime;
+        private System.Windows.Forms.Timer timerTime;
+        private System.Windows.Forms.Timer tmrTimeout;
     }
 }
 
