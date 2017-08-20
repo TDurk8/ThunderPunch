@@ -108,6 +108,7 @@
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -122,6 +123,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditPermissionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditPermissionsForm.Designer.cs">
+      <DependentUpon>EditPermissionsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormatText.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -140,6 +147,9 @@
     <Compile Include="SQLInteract.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Validation.cs" />
+    <EmbeddedResource Include="EditPermissionsForm.resx">
+      <DependentUpon>EditPermissionsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>

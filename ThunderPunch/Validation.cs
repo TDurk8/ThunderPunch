@@ -116,9 +116,9 @@ namespace ThunderPunch
 
         public bool CurrencyDigitsOnly(KeyPressEventArgs e)
         {
+            //only all numbers and the decimal for change
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != 46) return true;
             else return false;
-            //if (e.KeyChar == 46) MessageBox.Show(".");
             //return false;
         }
 

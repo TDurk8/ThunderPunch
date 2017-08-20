@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FlickrNet;
+using System.Drawing.Drawing2D;
 
 
 namespace ThunderPunch
@@ -17,10 +19,12 @@ namespace ThunderPunch
         private Validation validator = new Validation();
         private FormatText textFormater = new FormatText();
         
+        #region Setup Form
         public ModifyUserForm()
         {
             InitializeComponent();
             tbctrlUser.DrawItem += new DrawItemEventHandler(tbctrlUser_DrawItem);
+            
             SetUserForm();
         }
 
@@ -35,13 +39,14 @@ namespace ThunderPunch
                 {
 
                     // Draw a different background color, and don't paint a focus rectangle.
-                    _textBrush = new SolidBrush(Color.White);
+                    _textBrush = new SolidBrush(Color.PaleGreen);
                     g.FillRectangle(Brushes.Gray, e.Bounds);
+
                 }
             else
                 {
                     _textBrush = new SolidBrush(Color.White);
-                g.FillRectangle(Brushes.DarkSlateGray, e.Bounds);
+                g.FillRectangle(Brushes.Gray, e.Bounds);
                     //e.DrawBackground();
                 }
 
@@ -56,6 +61,23 @@ namespace ThunderPunch
             
         }
 
+        private void DrawBorder(Control con, Color color, int width)
+        {
+            ControlPaint.DrawBorder(con.CreateGraphics(),
+                con.ClientRectangle,
+                color,
+                width,
+                ButtonBorderStyle.Solid,
+                color,
+                width,
+                ButtonBorderStyle.Solid,
+                color,
+                width,
+                ButtonBorderStyle.Solid,
+                color,
+                width,
+                ButtonBorderStyle.Solid);
+        }
 
         private void SetStateList()
         {
@@ -89,6 +111,19 @@ namespace ThunderPunch
             }
         }
 
+        private void SetPermissionApp()
+        {
+            //clear existing data and set the Permission Types
+            cmbAppPermission.Items.Clear();
+            SQL_Interact sql = new SQL_Interact();
+            foreach(String type in sql.SetAppPermissions())
+            {
+                cmbAppPermission.Items.Add(type);
+            }
+            cmbAppPermission.Sorted = true;
+            cmbAppPermission.SelectedIndex = -1;
+        }
+
         private void cmbDept_SelectionChangeCommitted(object sender, EventArgs e)
         {
             SQL_Interact sql = new SQL_Interact();
@@ -109,7 +144,9 @@ namespace ThunderPunch
             SetStateList();
             SetEmployment();
             SetDepartment();
+            SetPermissionApp();
             cmbDept.Sorted=true;
+
             txtFName.Text="First";
             txtLName.Text = "Last";
             txtEmail.Clear();
@@ -158,6 +195,8 @@ namespace ThunderPunch
             txtWages.Text = "";
             cmbWages.SelectedIndex = 0;
             lblWageType.Text = "/ hour";
+
+            
         }
         public enum State
         {
@@ -315,13 +354,9 @@ namespace ThunderPunch
             [Description("Wyoming")]
             WY
         }
-
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            //Clear form for new user
-            SetUserForm();
-        }
-
+        #endregion
+        
+        #region Group Personal Info
         private void txtFName_Leave(object sender, EventArgs e)
         {
             textFormater.TextBoxLeave(txtFName, "First", lblNameError);
@@ -360,7 +395,7 @@ namespace ThunderPunch
         private void txtEmail_Leave(object sender, EventArgs e)
         {
             textFormater.TextBoxLeave(txtEmail, "", lblEmailError);
-            if (!validator.IsEmail(txtEmail.Text.Trim()) && txtEmail.Text.Trim()!= "")
+            if (!validator.IsEmail(txtEmail.Text.Trim()) && txtEmail.Text.Trim() != "")
             {
                 lblEmailError.Text = "Invalid Email";
                 txtEmail.Focus();
@@ -379,7 +414,7 @@ namespace ThunderPunch
 
         private void txtYearDOB_Leave(object sender, EventArgs e)
         {
-            textFormater.TextBoxLeave(txtYearDOB, "Year",lblDOBError);
+            textFormater.TextBoxLeave(txtYearDOB, "Year", lblDOBError);
             validator.IsValidDOB(cmboDOBMonth.SelectedIndex + 1, txtDayDOB.Text, txtYearDOB.Text, lblDOBError);
         }
 
@@ -397,7 +432,7 @@ namespace ThunderPunch
         private void txtZipcode_Leave(object sender, EventArgs e)
         {
             textFormater.TextBoxLeave(txtZipcode, "", lblZipError);
-            if (!validator.IsZip(txtZipcode.Text)&& txtZipcode.Text!="")
+            if (!validator.IsZip(txtZipcode.Text) && txtZipcode.Text != "")
             {
                 lblZipError.Text = "Invalid Zip";
                 txtZipcode.Focus();
@@ -446,12 +481,110 @@ namespace ThunderPunch
             txtPhone.Text = textFormater.RemoveFormat(txtPhone.Text);
             textFormater.TextBoxEnter(txtPhone, "");
         }
+        private void txtEmail_Enter(object sender, EventArgs e)
+        {
+            textFormater.TextBoxEnter(txtEmail, "");
+        }
+
+        private void txtAddress1_Enter(object sender, EventArgs e)
+        {
+            textFormater.TextBoxEnter(txtAddress1, "");
+        }
+
+        private void txtAddress2_Enter(object sender, EventArgs e)
+        {
+            textFormater.TextBoxEnter(txtAddress2, "");
+        }
+
+        private void txtCity_Enter(object sender, EventArgs e)
+        {
+            textFormater.TextBoxEnter(txtCity, "");
+        }
+
+        private void txtZipcode_Enter(object sender, EventArgs e)
+        {
+            textFormater.TextBoxEnter(txtZipcode, "");
+        }
+        #endregion
+
+        #region Group Company Role
+        private void grpCompanyRole_Enter(object sender, EventArgs e)
+        {
+            this.AcceptButton = btnCheck;
+        }
+        private void txtDayHired_Leave(object sender, EventArgs e)
+        {
+            textFormater.TextBoxLeave(txtDayHired, "Day", lblDateHiredError);
+            HireDateLeave();
+        }
+
+        private void txtYearHired_Leave(object sender, EventArgs e)
+        {
+            textFormater.TextBoxLeave(txtYearHired, "Year", lblDateHiredError);
+            HireDateLeave();
+        }
+
+        private void txtDayHired_Enter(object sender, EventArgs e)
+        {
+            textFormater.TextBoxEnter(txtDayHired, "Day");
+        }
+
+        private void txtYearHired_Enter(object sender, EventArgs e)
+        {
+            textFormater.TextBoxEnter(txtYearHired, "Year");
+        }
+
+        private void HireDateLeave()
+        {
+            if (txtDayHired.Text != "Day" && txtYearHired.Text != "Year" && cmbDateHired.SelectedIndex >= 0)
+            {
+                if (validator.IsValidHireDate(cmbDateHired.SelectedIndex, txtDayHired.Text, txtYearHired.Text))
+                {
+                    lblDateHiredError.Text = "Future Date";
+                }
+            }
+        }
+        private void txtDayHired_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = validator.DigitOnly(e);
+        }
+
+        private void txtYearHired_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = validator.DigitOnly(e);
+        }
+
+        private void txtWages_Leave(object sender, EventArgs e)
+        {
+            if (!validator.WageSalaryCheck(txtWages.Text, cmbWages, lblWageError))
+            {
+                txtWages.SelectAll();
+            }
+            txtWages.Text = textFormater.CurrencyFormat(txtWages.Text, cmbWages);
+        }
+
+        private void txtWages_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = validator.CurrencyDigitsOnly(e);
+        }
+
+        private void txtWages_Enter(object sender, EventArgs e)
+        {
+            txtWages.Text = textFormater.RemoveCurrencyFormat(txtWages.Text);
+        }
+
+        private void cmbWages_TextChanged(object sender, EventArgs e)
+        {
+            txtWages.Clear();
+            if (cmbWages.Text == "Hourly") lblWageType.Text = "/ hour";
+            else lblWageType.Text = "/ year";
+        }
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
             // verify first that login is 4 digits
             // check to see if Attempted Login Id Exists in DB already
-            
+
             lblLoginError.ForeColor = System.Drawing.Color.DarkRed;
             if (validator.FourDigits(txtLogin.Text))
             {
@@ -499,140 +632,30 @@ namespace ThunderPunch
         {
             //number between 0000 and 9999
             // find the four digit number, flesh it out with '0' if single, double, or triple digits
-            int min=0;
-            int max=9999;
+            int min = 0;
+            int max = 9999;
             Random rdm = new Random();
-            return (rdm.Next(min, max)).ToString().PadLeft(4,'0');            
+            return (rdm.Next(min, max)).ToString().PadLeft(4, '0');
         }
 
         private void grpPersonalInfo_Enter(object sender, EventArgs e)
         {
             this.AcceptButton = btnClear;
         }
+        #endregion
 
-        private void grpCompanyRole_Enter(object sender, EventArgs e)
+        #region Main Form Controls
+        private void btnClear_Click(object sender, EventArgs e)
         {
-            this.AcceptButton = btnCheck;
+            //Clear form for new user
+            SetUserForm();
         }
+        #endregion
 
-        private void txtDayHired_Leave(object sender, EventArgs e)
+        private void pbPermissionInfo_MouseHover(object sender, EventArgs e)
         {
-            textFormater.TextBoxLeave(txtDayHired, "Day", lblDateHiredError);
-            HireDateLeave();
-        }
-
-        private void txtYearHired_Leave(object sender, EventArgs e)
-        {
-            textFormater.TextBoxLeave(txtYearHired, "Year", lblDateHiredError);
-            HireDateLeave();
-        }
-
-        private void txtDayHired_Enter(object sender, EventArgs e)
-        {
-            textFormater.TextBoxEnter(txtDayHired, "Day");
-        }
-
-        private void txtYearHired_Enter(object sender, EventArgs e)
-        {
-            textFormater.TextBoxEnter(txtYearHired, "Year");
-        }
-
-        private void HireDateLeave()
-        {
-            if (txtDayHired.Text != "Day" && txtYearHired.Text != "Year" && cmbDateHired.SelectedIndex >= 0)
-            {
-                if (validator.IsValidHireDate(cmbDateHired.SelectedIndex, txtDayHired.Text, txtYearHired.Text))
-                {
-                    lblDateHiredError.Text = "Future Date";
-                }
-            }
-        }
-
-        private void TextBoxEnter(TextBox tb, string type)
-        {
-            if (tb.Text == type)
-            {
-                tb.Text = "";
-                tb.ForeColor = System.Drawing.Color.Black;
-                tb.Font = new Font(tb.Font, FontStyle.Regular);
-            }
-            else
-            {
-                tb.SelectAll();
-            }
-        }
-
-        private void txtEmail_Enter(object sender, EventArgs e)
-        {
-            textFormater.TextBoxEnter(txtEmail, "");
-        }
-
-        private void txtAddress1_Enter(object sender, EventArgs e)
-        {
-            textFormater.TextBoxEnter(txtAddress1, "");
-        }
-
-        private void txtAddress2_Enter(object sender, EventArgs e)
-        {
-            textFormater.TextBoxEnter(txtAddress2, "");
-        }
-
-        private void txtCity_Enter(object sender, EventArgs e)
-        {
-            textFormater.TextBoxEnter(txtCity, "");
-        }
-
-        private void txtZipcode_Enter(object sender, EventArgs e)
-        {
-            textFormater.TextBoxEnter(txtZipcode, "");
-        }
-
-        private void txtDayHired_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = validator.DigitOnly(e);
-        }
-
-        private void txtYearHired_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = validator.DigitOnly(e);
-        }
-
-        private void txtWages_Leave(object sender, EventArgs e)
-        {
-            if (!validator.WageSalaryCheck(txtWages.Text, cmbWages, lblWageError))
-            {
-                txtWages.SelectAll();
-            }
-            txtWages.Text = textFormater.CurrencyFormat(txtWages.Text, cmbWages);
-        }
-
-        private void txtWages_KeyPress(object sender, KeyPressEventArgs e)
-       {
-            e.Handled = validator.CurrencyDigitsOnly(e);
-        }
-
-        private void txtWages_Enter(object sender, EventArgs e)
-        {
-            txtWages.Text = textFormater.RemoveCurrencyFormat(txtWages.Text);
-        }
-
-        //private void cmbWages_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    MessageBox.Show("SelectedIndexChanged");
-            
-        //}
-
-        //private void cmbWages_SelectionChangeCommitted(object sender, EventArgs e)
-        //{
-        //    MessageBox.Show("Selection Change Committed");
-
-        //}
-
-        private void cmbWages_TextChanged(object sender, EventArgs e)
-        {
-            txtWages.Clear();
-            if (cmbWages.Text == "Hourly") lblWageType.Text = "/ hour";
-            else lblWageType.Text = "/ year";
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(pbPermissionInfo, "Sets permissions within the application\n and handles accessible information for user.");
         }
     }        
 }

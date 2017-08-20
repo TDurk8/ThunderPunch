@@ -69,6 +69,26 @@ namespace ThunderPunch
             return retList;
         }
 
+        public List<string> SetAppPermissions()
+        {
+            var retList = new List<string>();
+            SqlCommand command = new SqlCommand("SELECT Name FROM AppPermissions", cs);
+            try
+            {
+                cs.Open();
+                dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    retList.Add(dr["Name"].ToString());
+                }
+                cs.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return retList;
+        }
         //set Employment Types into dropdown menu from the Database
         public List<string> SetEmploymentTypes()
         {

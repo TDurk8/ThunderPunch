@@ -28,8 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModifyUserForm));
             this.tbctrlUser = new System.Windows.Forms.TabControl();
             this.tabUserPersonalInfo = new System.Windows.Forms.TabPage();
+            this.grpUserPermissions = new System.Windows.Forms.GroupBox();
+            this.pbPermissionInfo = new System.Windows.Forms.PictureBox();
+            this.cmbAppPermission = new System.Windows.Forms.ComboBox();
+            this.lblPermissions = new System.Windows.Forms.Label();
+            this.chkActive = new System.Windows.Forms.CheckBox();
             this.grpCompanyRole = new System.Windows.Forms.GroupBox();
             this.lblWageType = new System.Windows.Forms.Label();
             this.cmbWages = new System.Windows.Forms.ComboBox();
@@ -80,9 +87,13 @@
             this.lblState = new System.Windows.Forms.Label();
             this.lblZip = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
-            this.tbNew = new System.Windows.Forms.TabPage();
+            this.tabUserAdd = new System.Windows.Forms.TabPage();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.btnEditPermissions = new System.Windows.Forms.Button();
             this.tbctrlUser.SuspendLayout();
             this.tabUserPersonalInfo.SuspendLayout();
+            this.grpUserPermissions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPermissionInfo)).BeginInit();
             this.grpCompanyRole.SuspendLayout();
             this.grpPersonalInfo.SuspendLayout();
             this.SuspendLayout();
@@ -92,7 +103,7 @@
             this.tbctrlUser.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.tbctrlUser.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.tbctrlUser.Controls.Add(this.tabUserPersonalInfo);
-            this.tbctrlUser.Controls.Add(this.tbNew);
+            this.tbctrlUser.Controls.Add(this.tabUserAdd);
             this.tbctrlUser.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tbctrlUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbctrlUser.HotTrack = true;
@@ -110,17 +121,76 @@
             // tabUserPersonalInfo
             // 
             this.tabUserPersonalInfo.BackColor = System.Drawing.Color.Gray;
-            this.tabUserPersonalInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabUserPersonalInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.tabUserPersonalInfo.Controls.Add(this.grpUserPermissions);
             this.tabUserPersonalInfo.Controls.Add(this.grpCompanyRole);
             this.tabUserPersonalInfo.Controls.Add(this.grpSocialMedia);
             this.tabUserPersonalInfo.Controls.Add(this.grpPersonalInfo);
             this.tabUserPersonalInfo.Controls.Add(this.btnClear);
             this.tabUserPersonalInfo.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabUserPersonalInfo.ImageIndex = 0;
             this.tabUserPersonalInfo.Location = new System.Drawing.Point(107, 4);
             this.tabUserPersonalInfo.Margin = new System.Windows.Forms.Padding(0);
             this.tabUserPersonalInfo.Name = "tabUserPersonalInfo";
             this.tabUserPersonalInfo.Size = new System.Drawing.Size(765, 601);
             this.tabUserPersonalInfo.TabIndex = 0;
+            this.tabUserPersonalInfo.Text = "Add/Edit Employee";
+            // 
+            // grpUserPermissions
+            // 
+            this.grpUserPermissions.Controls.Add(this.btnEditPermissions);
+            this.grpUserPermissions.Controls.Add(this.pbPermissionInfo);
+            this.grpUserPermissions.Controls.Add(this.cmbAppPermission);
+            this.grpUserPermissions.Controls.Add(this.lblPermissions);
+            this.grpUserPermissions.Controls.Add(this.chkActive);
+            this.grpUserPermissions.ForeColor = System.Drawing.Color.PaleGreen;
+            this.grpUserPermissions.Location = new System.Drawing.Point(457, 280);
+            this.grpUserPermissions.Name = "grpUserPermissions";
+            this.grpUserPermissions.Size = new System.Drawing.Size(295, 279);
+            this.grpUserPermissions.TabIndex = 14;
+            this.grpUserPermissions.TabStop = false;
+            this.grpUserPermissions.Text = "App Settings";
+            // 
+            // pbPermissionInfo
+            // 
+            this.pbPermissionInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pbPermissionInfo.Image = ((System.Drawing.Image)(resources.GetObject("pbPermissionInfo.Image")));
+            this.pbPermissionInfo.Location = new System.Drawing.Point(153, 83);
+            this.pbPermissionInfo.Name = "pbPermissionInfo";
+            this.pbPermissionInfo.Size = new System.Drawing.Size(20, 20);
+            this.pbPermissionInfo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbPermissionInfo.TabIndex = 3;
+            this.pbPermissionInfo.TabStop = false;
+            // 
+            // cmbAppPermission
+            // 
+            this.cmbAppPermission.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbAppPermission.FormattingEnabled = true;
+            this.cmbAppPermission.Location = new System.Drawing.Point(27, 106);
+            this.cmbAppPermission.Name = "cmbAppPermission";
+            this.cmbAppPermission.Size = new System.Drawing.Size(146, 28);
+            this.cmbAppPermission.TabIndex = 2;
+            // 
+            // lblPermissions
+            // 
+            this.lblPermissions.AutoSize = true;
+            this.lblPermissions.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblPermissions.Location = new System.Drawing.Point(23, 80);
+            this.lblPermissions.Name = "lblPermissions";
+            this.lblPermissions.Size = new System.Drawing.Size(128, 23);
+            this.lblPermissions.TabIndex = 1;
+            this.lblPermissions.Text = "Permission Level";
+            // 
+            // chkActive
+            // 
+            this.chkActive.AutoSize = true;
+            this.chkActive.ForeColor = System.Drawing.SystemColors.Control;
+            this.chkActive.Location = new System.Drawing.Point(27, 31);
+            this.chkActive.Name = "chkActive";
+            this.chkActive.Size = new System.Drawing.Size(69, 27);
+            this.chkActive.TabIndex = 0;
+            this.chkActive.Text = "Active";
+            this.chkActive.UseVisualStyleBackColor = true;
             // 
             // grpCompanyRole
             // 
@@ -806,17 +876,36 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // tbNew
+            // tabUserAdd
             // 
-            this.tbNew.BackColor = System.Drawing.Color.Gray;
-            this.tbNew.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tbNew.Font = new System.Drawing.Font("Arial Narrow", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNew.Location = new System.Drawing.Point(107, 4);
-            this.tbNew.Margin = new System.Windows.Forms.Padding(0);
-            this.tbNew.Name = "tbNew";
-            this.tbNew.Size = new System.Drawing.Size(765, 601);
-            this.tbNew.TabIndex = 1;
-            this.tbNew.Text = "New Employee";
+            this.tabUserAdd.BackColor = System.Drawing.Color.Gray;
+            this.tabUserAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabUserAdd.Font = new System.Drawing.Font("Arial Narrow", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabUserAdd.ImageIndex = 1;
+            this.tabUserAdd.Location = new System.Drawing.Point(107, 4);
+            this.tabUserAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.tabUserAdd.Name = "tabUserAdd";
+            this.tabUserAdd.Size = new System.Drawing.Size(765, 601);
+            this.tabUserAdd.TabIndex = 1;
+            this.tabUserAdd.Text = "New Employee";
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "EditUser.png");
+            this.imageList1.Images.SetKeyName(1, "add-user-512.png");
+            // 
+            // btnEditPermissions
+            // 
+            this.btnEditPermissions.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditPermissions.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnEditPermissions.Location = new System.Drawing.Point(179, 104);
+            this.btnEditPermissions.Name = "btnEditPermissions";
+            this.btnEditPermissions.Size = new System.Drawing.Size(75, 30);
+            this.btnEditPermissions.TabIndex = 4;
+            this.btnEditPermissions.Text = "Edit";
+            this.btnEditPermissions.UseVisualStyleBackColor = true;
             // 
             // ModifyUserForm
             // 
@@ -829,6 +918,9 @@
             this.Text = "ModifyUserForm";
             this.tbctrlUser.ResumeLayout(false);
             this.tabUserPersonalInfo.ResumeLayout(false);
+            this.grpUserPermissions.ResumeLayout(false);
+            this.grpUserPermissions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPermissionInfo)).EndInit();
             this.grpCompanyRole.ResumeLayout(false);
             this.grpCompanyRole.PerformLayout();
             this.grpPersonalInfo.ResumeLayout(false);
@@ -841,7 +933,7 @@
 
         private System.Windows.Forms.TabControl tbctrlUser;
         private System.Windows.Forms.TabPage tabUserPersonalInfo;
-        private System.Windows.Forms.TabPage tbNew;
+        private System.Windows.Forms.TabPage tabUserAdd;
         private System.Windows.Forms.TextBox txtFName;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox txtLName;
@@ -892,5 +984,12 @@
         private System.Windows.Forms.Label lblWageError;
         private System.Windows.Forms.Label lblWageType;
         private System.Windows.Forms.ComboBox cmbWages;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.GroupBox grpUserPermissions;
+        private System.Windows.Forms.PictureBox pbPermissionInfo;
+        private System.Windows.Forms.ComboBox cmbAppPermission;
+        private System.Windows.Forms.Label lblPermissions;
+        private System.Windows.Forms.CheckBox chkActive;
+        private System.Windows.Forms.Button btnEditPermissions;
     }
 }
