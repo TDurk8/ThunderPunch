@@ -657,5 +657,10 @@ namespace ThunderPunch
             ToolTip tt = new ToolTip();
             tt.SetToolTip(pbPermissionInfo, "Sets permissions within the application\n and handles accessible information for user.");
         }
+
+        private void txtFName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }        
 }

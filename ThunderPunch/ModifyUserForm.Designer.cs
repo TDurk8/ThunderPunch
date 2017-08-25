@@ -33,6 +33,7 @@
             this.tbctrlUser = new System.Windows.Forms.TabControl();
             this.tabUserPersonalInfo = new System.Windows.Forms.TabPage();
             this.grpUserPermissions = new System.Windows.Forms.GroupBox();
+            this.btnEditPermissions = new System.Windows.Forms.Button();
             this.pbPermissionInfo = new System.Windows.Forms.PictureBox();
             this.cmbAppPermission = new System.Windows.Forms.ComboBox();
             this.lblPermissions = new System.Windows.Forms.Label();
@@ -89,7 +90,6 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.tabUserAdd = new System.Windows.Forms.TabPage();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.btnEditPermissions = new System.Windows.Forms.Button();
             this.tbctrlUser.SuspendLayout();
             this.tabUserPersonalInfo.SuspendLayout();
             this.grpUserPermissions.SuspendLayout();
@@ -150,6 +150,17 @@
             this.grpUserPermissions.TabIndex = 14;
             this.grpUserPermissions.TabStop = false;
             this.grpUserPermissions.Text = "App Settings";
+            // 
+            // btnEditPermissions
+            // 
+            this.btnEditPermissions.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditPermissions.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnEditPermissions.Location = new System.Drawing.Point(179, 104);
+            this.btnEditPermissions.Name = "btnEditPermissions";
+            this.btnEditPermissions.Size = new System.Drawing.Size(75, 30);
+            this.btnEditPermissions.TabIndex = 4;
+            this.btnEditPermissions.Text = "Edit";
+            this.btnEditPermissions.UseVisualStyleBackColor = true;
             // 
             // pbPermissionInfo
             // 
@@ -829,6 +840,7 @@
             this.txtFName.Size = new System.Drawing.Size(107, 26);
             this.txtFName.TabIndex = 0;
             this.txtFName.Text = "  First";
+            this.txtFName.TextChanged += new System.EventHandler(this.txtFName_TextChanged);
             this.txtFName.Enter += new System.EventHandler(this.txtFName_Enter);
             this.txtFName.Leave += new System.EventHandler(this.txtFName_Leave);
             // 
@@ -895,17 +907,6 @@
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "EditUser.png");
             this.imageList1.Images.SetKeyName(1, "add-user-512.png");
-            // 
-            // btnEditPermissions
-            // 
-            this.btnEditPermissions.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditPermissions.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEditPermissions.Location = new System.Drawing.Point(179, 104);
-            this.btnEditPermissions.Name = "btnEditPermissions";
-            this.btnEditPermissions.Size = new System.Drawing.Size(75, 30);
-            this.btnEditPermissions.TabIndex = 4;
-            this.btnEditPermissions.Text = "Edit";
-            this.btnEditPermissions.UseVisualStyleBackColor = true;
             // 
             // ModifyUserForm
             // 

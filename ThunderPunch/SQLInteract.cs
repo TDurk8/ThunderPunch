@@ -89,6 +89,62 @@ namespace ThunderPunch
             }
             return retList;
         }
+        public Permissions GetPermissions(String name)
+        {
+            var retList = new List<string>();
+            Permissions returnPerm = new Permissions(name,name);
+            SqlCommand command = new SqlCommand("SELECT PermissionEdit,UserInfoEdit,ViewReports,SocialMediaEdit,PunchEdit FROM AppPermissions WHERE Name=@name", cs);
+            command.Parameters.AddWithValue("@name", name);
+
+            try
+            {
+                cs.Open();
+                dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    returnPerm.EditPermissions = dr.GetBoolean(0);
+                    returnPerm.EditUserInfo = dr.GetBoolean(1);
+                    returnPerm.ViewReports = dr.GetBoolean(2);
+                    returnPerm.EditSocialMedia = dr.GetBoolean(3);
+                    returnPerm.EditPunches = dr.GetBoolean(4);
+                }
+                cs.Close();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return returnPerm;
+        }
+
+        public void UpdateAppPermissions(Permissions perm)
+        {
+            //MessageBox.Show(perm.EditPermissions.ToString());
+            //MessageBox.Show(perm.EditUserInfo.ToString());
+            //MessageBox.Show(perm.ViewReports.ToString());
+            //MessageBox.Show(perm.EditSocialMedia.ToString());
+            //MessageBox.Show(perm.EditPunches.ToString());
+
+            SqlCommand command = new SqlCommand("UPDATE AppPermissions SET PermissionEdit=@perm,UserInfoEdit=@userinfo,ViewReports=@reports,SocialMediaEdit=@social,PunchEdit=@punch,Name=@UpdateName WHERE Name=@Name", cs);
+            command.Parameters.AddWithValue("@perm", perm.EditPermissions);
+            command.Parameters.AddWithValue("@userinfo", perm.EditUserInfo);
+            command.Parameters.AddWithValue("@reports", perm.ViewReports);
+            command.Parameters.AddWithValue("@social", perm.EditSocialMedia);
+            command.Parameters.AddWithValue("@punch", perm.EditPunches);
+            command.Parameters.AddWithValue("@Name", perm.OriginalPermission);
+            command.Parameters.AddWithValue("@UpdateName", perm.UpdatedPermission);
+
+            try
+            {
+                cs.Open();
+                command.ExecuteNonQuery();
+                cs.Close();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
         //set Employment Types into dropdown menu from the Database
         public List<string> SetEmploymentTypes()
         {
@@ -159,7 +215,6 @@ namespace ThunderPunch
             
             try
             {
-                
                 cs.Open();
                 cs.Close();
                 return true;
