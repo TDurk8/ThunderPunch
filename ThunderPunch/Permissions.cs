@@ -13,6 +13,7 @@ namespace ThunderPunch
         private bool _viewReports = false;
         private bool _editSocialMedia = false;
         private bool _editPunches = false;
+        private string _name;
         private string _originalPermission;
         private string _updatedPermission;
 
@@ -23,11 +24,16 @@ namespace ThunderPunch
         public bool EditPunches { get => _editPunches; set => _editPunches = value; }
         public string OriginalPermission { get => _originalPermission; set => _originalPermission = value; }
         public string UpdatedPermission { get => _updatedPermission; set => _updatedPermission = value; }
+        public string Name { get => _name; set => _name = value; }
 
         public Permissions(String original,String updated)
         {
             this._originalPermission = original;
             this.UpdatedPermission = updated;
+        }
+        public Permissions(String name)
+        {
+            this.Name = name;
         }
     }
 }

@@ -41,6 +41,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblPermissionError = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.grpPermissions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -172,7 +173,7 @@
             // 
             this.btnSave.AutoSize = true;
             this.btnSave.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(87, 224);
+            this.btnSave.Location = new System.Drawing.Point(33, 224);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 30);
             this.btnSave.TabIndex = 5;
@@ -186,7 +187,7 @@
             this.btnCancel.AutoSize = true;
             this.btnCancel.Enabled = false;
             this.btnCancel.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(168, 224);
+            this.btnCancel.Location = new System.Drawing.Point(226, 224);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 30);
             this.btnCancel.TabIndex = 20;
@@ -206,6 +207,19 @@
             this.lblPermissionError.TabIndex = 8;
             this.lblPermissionError.Text = "Invalid Name";
             // 
+            // btnDelete
+            // 
+            this.btnDelete.AutoSize = true;
+            this.btnDelete.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(134, 224);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 30);
+            this.btnDelete.TabIndex = 21;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Visible = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // EditPermissionsForm
             // 
             this.AcceptButton = this.btnEdit;
@@ -213,6 +227,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(340, 277);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.lblPermissionError);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -245,5 +260,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblPermissionError;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

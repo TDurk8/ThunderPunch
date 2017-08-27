@@ -117,15 +117,32 @@ namespace ThunderPunch
             return returnPerm;
         }
 
+        public void AddAppPermissions(Permissions perm)
+        {
+            SqlCommand command = new SqlCommand("INSERT INTO AppPermissions (Name, PermissionEdit,UserInfoEdit,ViewReports,SocialMediaEdit,PunchEdit)" +
+                                                "VALUES (@name,@permEdit,@userinfo,@reports,@socialmedia,@punch)",cs);
+            command.Parameters.AddWithValue("@name", perm.Name);
+            command.Parameters.AddWithValue("@permEdit", perm.EditPermissions);
+            command.Parameters.AddWithValue("@userinfo", perm.EditUserInfo);
+            command.Parameters.AddWithValue("@reports", perm.ViewReports);
+            command.Parameters.AddWithValue("@socialmedia", perm.EditSocialMedia);
+            command.Parameters.AddWithValue("@punch", perm.EditPunches);
+
+            try
+            {
+                cs.Open();
+                command.ExecuteNonQuery();
+                cs.Close();
+                MessageBox.Show("Permission " + perm.Name + " added!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
         public void UpdateAppPermissions(Permissions perm)
         {
-            //MessageBox.Show(perm.EditPermissions.ToString());
-            //MessageBox.Show(perm.EditUserInfo.ToString());
-            //MessageBox.Show(perm.ViewReports.ToString());
-            //MessageBox.Show(perm.EditSocialMedia.ToString());
-            //MessageBox.Show(perm.EditPunches.ToString());
-
-            SqlCommand command = new SqlCommand("UPDATE AppPermissions SET PermissionEdit=@perm,UserInfoEdit=@userinfo,ViewReports=@reports,SocialMediaEdit=@social,PunchEdit=@punch,Name=@UpdateName WHERE Name=@Name", cs);
+             SqlCommand command = new SqlCommand("UPDATE AppPermissions SET PermissionEdit=@perm,UserInfoEdit=@userinfo,ViewReports=@reports,SocialMediaEdit=@social,PunchEdit=@punch,Name=@UpdateName WHERE Name=@Name", cs);
             command.Parameters.AddWithValue("@perm", perm.EditPermissions);
             command.Parameters.AddWithValue("@userinfo", perm.EditUserInfo);
             command.Parameters.AddWithValue("@reports", perm.ViewReports);
@@ -139,11 +156,30 @@ namespace ThunderPunch
                 cs.Open();
                 command.ExecuteNonQuery();
                 cs.Close();
+                MessageBox.Show("Permission " + perm.UpdatedPermission + " Updated!");
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
+        }
+
+        public void DeletePermissions(String perm)
+        {
+            SqlCommand command = new SqlCommand("DELETE FROM AppPermissions WHERE name = @name",cs);
+            command.Parameters.AddWithValue("@name", perm);
+            try
+            {
+                cs.Open();
+                command.ExecuteNonQuery();
+                cs.Close();
+                MessageBox.Show("Permission " + perm + " deleted!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            
         }
         //set Employment Types into dropdown menu from the Database
         public List<string> SetEmploymentTypes()

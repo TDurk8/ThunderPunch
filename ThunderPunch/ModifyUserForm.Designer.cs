@@ -161,6 +161,7 @@
             this.btnEditPermissions.TabIndex = 4;
             this.btnEditPermissions.Text = "Edit";
             this.btnEditPermissions.UseVisualStyleBackColor = true;
+            this.btnEditPermissions.Click += new System.EventHandler(this.btnEditPermissions_Click);
             // 
             // pbPermissionInfo
             // 
@@ -175,6 +176,7 @@
             // 
             // cmbAppPermission
             // 
+            this.cmbAppPermission.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAppPermission.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbAppPermission.FormattingEnabled = true;
             this.cmbAppPermission.Location = new System.Drawing.Point(27, 106);
@@ -840,7 +842,6 @@
             this.txtFName.Size = new System.Drawing.Size(107, 26);
             this.txtFName.TabIndex = 0;
             this.txtFName.Text = "  First";
-            this.txtFName.TextChanged += new System.EventHandler(this.txtFName_TextChanged);
             this.txtFName.Enter += new System.EventHandler(this.txtFName_Enter);
             this.txtFName.Leave += new System.EventHandler(this.txtFName_Leave);
             // 

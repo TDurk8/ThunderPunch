@@ -658,9 +658,16 @@ namespace ThunderPunch
             tt.SetToolTip(pbPermissionInfo, "Sets permissions within the application\n and handles accessible information for user.");
         }
 
-        private void txtFName_TextChanged(object sender, EventArgs e)
+        private void btnEditPermissions_Click(object sender, EventArgs e)
         {
+            EditPermissionsForm permForm = new EditPermissionsForm();
+            permForm.FormClosed += new FormClosedEventHandler(permform_FormClosed);
+            permForm.Show();
+        }
 
+        void permform_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SetPermissionApp();
         }
     }        
 }

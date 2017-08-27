@@ -15,6 +15,7 @@ namespace ThunderPunch
         FormatText texter = new FormatText();
         Validation validator = new Validation();
         string originalPermission;
+        bool addPermission = false;
         public EditPermissionsForm()
         {
             InitializeComponent();
@@ -37,18 +38,20 @@ namespace ThunderPunch
         {
             if (cmbPermissionTypes.SelectedIndex > -1)
             {
+                addPermission = false;
                 btnAdd.Enabled = false;
                 btnEdit.Enabled = false;
                 btnCancel.Visible = true;
                 btnCancel.Enabled = true;
                 btnSave.Visible = true;
+                btnDelete.Visible = true;
                 cmbPermissionTypes.Enabled = false;
                 grpPermissions.Enabled = true;
                 txtPermissionTitle.Enabled = true;
                 txtPermissionTitle.Text = cmbPermissionTypes.Text;
                 txtPermissionTitle.SelectAll();
                 txtPermissionTitle.Focus();
-                originalPermission = txtPermissionTitle.Text;
+                originalPermission = cmbPermissionTypes.Text;
                 SQL_Interact sql = new SQL_Interact();
                 Permissions perm = sql.GetPermissions(cmbPermissionTypes.Text);
                 chkEditPermission.Checked = perm.EditPermissions;
@@ -61,9 +64,11 @@ namespace ThunderPunch
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            addPermission = false;
             btnAdd.Enabled = true;
             btnCancel.Visible = false;
             btnSave.Visible = false;
+            btnDelete.Visible = false;
             cmbPermissionTypes.Enabled = true;
             grpPermissions.Enabled = false;
             txtPermissionTitle.Enabled = false;
@@ -86,51 +91,79 @@ namespace ThunderPunch
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            addPermission = true;
             btnAdd.Enabled = false;
             btnEdit.Enabled = false;
             btnCancel.Visible = true;
             btnCancel.Enabled = true;
             btnSave.Visible = true;
+            cmbPermissionTypes.SelectedIndex = -1;
             cmbPermissionTypes.Enabled = false;
+            originalPermission = cmbPermissionTypes.Text;
             grpPermissions.Enabled = true;
             txtPermissionTitle.Enabled = true;
             texter.TextBoxEnter(txtPermissionTitle, "Permission Level Name");
             txtPermissionTitle.Focus();
             
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            DialogResult dialogbox = MessageBox.Show("Would you like to save current configurations?", "Save Permissions", MessageBoxButtons.YesNo);
-            if (dialogbox== DialogResult.Yes)
+            if (lblPermissionError.Text != "") MessageBox.Show("Correct Errors Before Saving");
+            else
             {
-                SQL_Interact sql = new SQL_Interact();
-                Permissions perm = new Permissions(originalPermission ,txtPermissionTitle.Text);
+                DialogResult dialogbox = MessageBox.Show("Would you like to save current configurations?", "Save Permissions", MessageBoxButtons.YesNo);
+                if (dialogbox == DialogResult.Yes && (!addPermission))
+                {
+                    SQL_Interact sql = new SQL_Interact();
+                    Permissions perm = new Permissions(originalPermission, txtPermissionTitle.Text);
 
-                //if check set to true. By default, when Permission object is created all values are set
-                //to false by the constructor.
-                if (chkEditPermission.Checked) perm.EditPermissions = true;
-                if (chkEditPunches.Checked) perm.EditPunches = true;
-                if (chkEditSocialMedia.Checked) perm.EditSocialMedia = true;
-                if (chkEditUserInfo.Checked) perm.EditUserInfo = true;
-                if (chkViewReports.Checked) perm.ViewReports = true;
-                sql.UpdateAppPermissions(perm);
-                btnCancel.PerformClick();
+                    //if check set to true. By default, when Permission object is created all values are set
+                    //to false by the constructor.
+                    if (chkEditPermission.Checked) perm.EditPermissions = true;
+                    if (chkEditPunches.Checked) perm.EditPunches = true;
+                    if (chkEditSocialMedia.Checked) perm.EditSocialMedia = true;
+                    if (chkEditUserInfo.Checked) perm.EditUserInfo = true;
+                    if (chkViewReports.Checked) perm.ViewReports = true;
+                    sql.UpdateAppPermissions(perm);
+                    btnCancel.PerformClick();
+                }
+                else if(dialogbox==DialogResult.Yes && addPermission)
+                {
+                    SQL_Interact sql = new SQL_Interact();
+                    Permissions perm = new Permissions(txtPermissionTitle.Text);
+                    perm.EditPermissions = chkEditPermission.Checked;
+                    perm.EditUserInfo = chkEditUserInfo.Checked;
+                    perm.ViewReports = chkViewReports.Checked;
+                    perm.EditSocialMedia = chkEditSocialMedia.Checked;
+                    perm.EditPunches = chkEditPunches.Checked;
+                    sql.AddAppPermissions(perm);
+                    btnCancel.PerformClick();
+                }
             }
-        }
+         }
 
         private void txtPermissionTitle_Leave(object sender, EventArgs e)
         {
-
-            texter.TextBoxLeave(txtPermissionTitle, "", lblPermissionError);
-            if (!validator.IsAlpha(txtPermissionTitle.Text))
+            lblPermissionError.Text = "";
+            //txtPermissionTitle.Text = txtPermissionTitle.Text.Trim();
+            if (txtPermissionTitle.Text == "")
             {
-                lblPermissionError.Text = "Invalid Name";
+                lblPermissionError.Text = "Blank Permission";
                 txtPermissionTitle.Focus();
             }
             else
             {
-                
+                foreach (var perm in cmbPermissionTypes.Items)
+                {
+                    if (perm.ToString().ToLower() == txtPermissionTitle.Text.ToLower() && originalPermission.ToLower() != txtPermissionTitle.Text.ToLower())
+                    {
+                        lblPermissionError.Text = "Already Exists";
+                        txtPermissionTitle.Focus();
+                        break;
+                    }
+                }
             }
         }
 
@@ -139,9 +172,18 @@ namespace ThunderPunch
         //reinsert the text.
         private void txtPermissionTitle_Enter(object sender, EventArgs e)
         {
-            string temp = cmbPermissionTypes.Text;
-            texter.TextBoxEnter(txtPermissionTitle, temp);
-            txtPermissionTitle.Text = temp;
+
+                string temp = txtPermissionTitle.Text;
+                texter.TextBoxEnter(txtPermissionTitle, temp);
+                txtPermissionTitle.Text = temp;
+            
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            SQL_Interact sql = new SQL_Interact();
+            sql.DeletePermissions(cmbPermissionTypes.Text);
+            btnCancel.PerformClick();
         }
     }
 }

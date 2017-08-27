@@ -56,10 +56,16 @@
             this.lblCurrentTime = new System.Windows.Forms.Label();
             this.timerTime = new System.Windows.Forms.Timer(this.components);
             this.tmrTimeout = new System.Windows.Forms.Timer(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnPunchIn = new System.Windows.Forms.Button();
+            this.btnPunchOut = new System.Windows.Forms.Button();
+            this.btnModifyUser = new System.Windows.Forms.Button();
+            this.btnEditPunch = new System.Windows.Forms.Button();
             this.grpKeyPad.SuspendLayout();
             this.grpEmployeeInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbProfilePic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNetworkStatus)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn1
@@ -277,7 +283,7 @@
             this.grpEmployeeInfo.Controls.Add(this.pbProfilePic);
             this.grpEmployeeInfo.Location = new System.Drawing.Point(370, 81);
             this.grpEmployeeInfo.Name = "grpEmployeeInfo";
-            this.grpEmployeeInfo.Size = new System.Drawing.Size(391, 428);
+            this.grpEmployeeInfo.Size = new System.Drawing.Size(391, 190);
             this.grpEmployeeInfo.TabIndex = 16;
             this.grpEmployeeInfo.TabStop = false;
             // 
@@ -369,12 +375,66 @@
             this.tmrTimeout.Interval = 10000;
             this.tmrTimeout.Tick += new System.EventHandler(this.tmrTimeout_Tick);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnPunchIn);
+            this.groupBox1.Controls.Add(this.btnPunchOut);
+            this.groupBox1.Controls.Add(this.btnModifyUser);
+            this.groupBox1.Controls.Add(this.btnEditPunch);
+            this.groupBox1.Location = new System.Drawing.Point(370, 277);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(391, 244);
+            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabStop = false;
+            // 
+            // btnPunchIn
+            // 
+            this.btnPunchIn.Location = new System.Drawing.Point(11, 103);
+            this.btnPunchIn.Name = "btnPunchIn";
+            this.btnPunchIn.Size = new System.Drawing.Size(84, 23);
+            this.btnPunchIn.TabIndex = 21;
+            this.btnPunchIn.Text = "Punch In";
+            this.btnPunchIn.UseVisualStyleBackColor = true;
+            this.btnPunchIn.Visible = false;
+            // 
+            // btnPunchOut
+            // 
+            this.btnPunchOut.Location = new System.Drawing.Point(11, 132);
+            this.btnPunchOut.Name = "btnPunchOut";
+            this.btnPunchOut.Size = new System.Drawing.Size(84, 23);
+            this.btnPunchOut.TabIndex = 22;
+            this.btnPunchOut.Text = "Punch Out";
+            this.btnPunchOut.UseVisualStyleBackColor = true;
+            this.btnPunchOut.Visible = false;
+            // 
+            // btnModifyUser
+            // 
+            this.btnModifyUser.AutoSize = true;
+            this.btnModifyUser.Location = new System.Drawing.Point(11, 177);
+            this.btnModifyUser.Name = "btnModifyUser";
+            this.btnModifyUser.Size = new System.Drawing.Size(84, 23);
+            this.btnModifyUser.TabIndex = 23;
+            this.btnModifyUser.Text = "Edit Employee";
+            this.btnModifyUser.UseVisualStyleBackColor = true;
+            this.btnModifyUser.Visible = false;
+            // 
+            // btnEditPunch
+            // 
+            this.btnEditPunch.Location = new System.Drawing.Point(11, 215);
+            this.btnEditPunch.Name = "btnEditPunch";
+            this.btnEditPunch.Size = new System.Drawing.Size(84, 23);
+            this.btnEditPunch.TabIndex = 24;
+            this.btnEditPunch.Text = "Edit Punch";
+            this.btnEditPunch.UseVisualStyleBackColor = true;
+            this.btnEditPunch.Visible = false;
+            // 
             // frmLogin
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(773, 681);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblCurrentTime);
             this.Controls.Add(this.btnshow);
             this.Controls.Add(this.lblNetworkStatus);
@@ -393,6 +453,8 @@
             this.grpEmployeeInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbProfilePic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNetworkStatus)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -427,6 +489,11 @@
         private System.Windows.Forms.Label lblCurrentTime;
         private System.Windows.Forms.Timer timerTime;
         private System.Windows.Forms.Timer tmrTimeout;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnPunchIn;
+        private System.Windows.Forms.Button btnPunchOut;
+        private System.Windows.Forms.Button btnModifyUser;
+        private System.Windows.Forms.Button btnEditPunch;
     }
 }
 
